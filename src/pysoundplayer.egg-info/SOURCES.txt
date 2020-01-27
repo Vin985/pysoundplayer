@@ -1,0 +1,14 @@
+README.md
+setup.cfg
+setup.py
+src/pysoundplayer/__init__.py
+src/pysoundplayer/sound_player.py
+src/pysoundplayer.egg-info/PKG-INFO
+src/pysoundplayer.egg-info/SOURCES.txt
+src/pysoundplayer.egg-info/dependency_links.txt
+src/pysoundplayer.egg-info/top_level.txt
+src/pysoundplayer/gui/QSoundPlayer.py
+src/pysoundplayer/gui/QSoundPlayer_ui.py
+src/pysoundplayer/gui/__init__.py
+src/pysoundplayer/gui/qsoundplayer_rc.py
+src/pysoundplayer/gui/sound_controller_ui.py
