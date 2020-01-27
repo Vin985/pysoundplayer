@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>870</width>
-    <height>70</height>
+    <height>77</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -17,7 +17,7 @@
    <item>
     <layout class="QHBoxLayout" name="horizontalLayout">
      <item>
-      <widget class="QSlider" name="slider_time">
+      <widget class="QJumpSlider" name="slider_time">
        <property name="orientation">
         <enum>Qt::Horizontal</enum>
        </property>
@@ -191,6 +191,13 @@
    </item>
   </layout>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>QJumpSlider</class>
+   <extends>QSlider</extends>
+   <header>QJumpSlider.h</header>
+  </customwidget>
+ </customwidgets>
  <resources>
   <include location="qsoundplayer.qrc"/>
  </resources>

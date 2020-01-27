@@ -13,6 +13,8 @@ class QSoundPlayer(QtWidgets.QWidget, Ui_QSoundPlayer):
 
     TOOLTIP_PLAY = "Play"
     TOOLTIP_PAUSE = "Pause"
+    SLIDER_INTERVAL = 0.1  # seconds
+    UPDATE_REFRESH_INTERVAL = 100  # miliseconds
 
     update_position = QtCore.Signal()
     start_playing = QtCore.Signal()
@@ -28,7 +30,6 @@ class QSoundPlayer(QtWidgets.QWidget, Ui_QSoundPlayer):
         self.playing = False
         self.update_timer = QtCore.QTimer()
         self.sound_speed = 1
-        self.slider_time.setMaximum(100)
         self.link_events()
         self.init_playback_speeds()
         if self.file_path is not None:
@@ -52,6 +53,7 @@ class QSoundPlayer(QtWidgets.QWidget, Ui_QSoundPlayer):
             return
         self.sound_player.load(self.file_path)
         self.duration = self.sound_player.duration
+        self.slider_time.setMaximum(self.duration / self.SLIDER_INTERVAL)
         self.update_position_label()
 
     def init_playback_speeds(self):
@@ -94,14 +96,14 @@ class QSoundPlayer(QtWidgets.QWidget, Ui_QSoundPlayer):
         self.update_position_ui()
         self.update_play_btn(self.TOOLTIP_PLAY, checked=False)
 
-    def seek(self, pos):
+    def seek(self, pos, update_position=True):
         self.position = pos
         self.sound_player.seek(pos)
-        self.update_sound_position()
+        if update_position:
+            self.update_sound_position()
 
     def seek_slider(self, value):
-        print(value)
-        self.seek(value/100 * self.duration)
+        self.seek(value * self.SLIDER_INTERVAL, update_position=False)
 
     def change_playback_speed(self, idx):
         speed = float(self.cb_playbackSpeed.itemText(idx))
@@ -134,7 +136,7 @@ class QSoundPlayer(QtWidgets.QWidget, Ui_QSoundPlayer):
         self.update_slider()
 
     def update_slider(self):
-        slider_pos = int(self.position/self.duration * 100)
+        slider_pos = int(self.position / self.SLIDER_INTERVAL)
         self.slider_time.setSliderPosition(slider_pos)
 
     def update_position_label(self):

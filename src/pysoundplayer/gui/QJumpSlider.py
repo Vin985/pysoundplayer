@@ -1,7 +1,7 @@
 from PySide2 import QtWidgets
 
 
-class JumpSlider(QtWidgets.QSlider):
+class QJumpSlider(QtWidgets.QSlider):
 
     def mousePressEvent(self, ev):
         """ Jump to click position """
