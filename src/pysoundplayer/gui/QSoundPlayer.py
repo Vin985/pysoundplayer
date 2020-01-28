@@ -43,7 +43,7 @@ class QSoundPlayer(QtWidgets.QWidget, Ui_QSoundPlayer):
         self.cb_playbackSpeed.activated.connect(
             self.change_playback_speed)
         self.update_timer.timeout.connect(self.update_sound_position)
-        self.slider_time.valueChanged.connect(self.seek_slider)
+        self.slider_time.seek_position.connect(self.seek_slider)
 
     def load_file(self, file_path=None):
         if file_path is not None:
