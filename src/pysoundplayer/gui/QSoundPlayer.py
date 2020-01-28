@@ -67,9 +67,6 @@ class QSoundPlayer(QtWidgets.QWidget, Ui_QSoundPlayer):
         self.cb_playbackSpeed.setCurrentIndex(
             self.SOUNDS_SPEEDS.index(self.sound_speed))
 
-    def loadSound(self, wavfile):
-        self.sound_player.load(wavfile)
-
     def play_pause(self):
         if self.playing:
             self.pause()
