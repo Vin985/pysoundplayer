@@ -26,6 +26,7 @@ class SoundPlayer():
                                    output=True,
                                    start=False,
                                    stream_callback=self.read_frames)
+        print(self.stream)
 
     def load(self, file_path):
         print("loading: " + file_path)
