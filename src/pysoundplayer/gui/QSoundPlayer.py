@@ -19,7 +19,7 @@ class QSoundPlayer(QtWidgets.QWidget, Ui_QSoundPlayer):
     update_position = QtCore.Signal(float)
     start_playing = QtCore.Signal()
 
-    def __init__(self, file_path=None, parent=None):
+    def __init__(self, parent=None, file_path=None):
         super().__init__(parent)
         self.setupUi(self)
         self.file_path = file_path
