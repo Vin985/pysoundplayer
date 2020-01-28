@@ -16,7 +16,7 @@ class QSoundPlayer(QtWidgets.QWidget, Ui_QSoundPlayer):
     SLIDER_INTERVAL = 0.1  # seconds
     UPDATE_REFRESH_INTERVAL = 100  # miliseconds
 
-    update_position = QtCore.Signal()
+    update_position = QtCore.Signal(float)
     start_playing = QtCore.Signal()
 
     def __init__(self, file_path=None, parent=None):
@@ -129,7 +129,7 @@ class QSoundPlayer(QtWidgets.QWidget, Ui_QSoundPlayer):
             self.btn_play.click()
         self.update_position_ui()
 
-        self.update_position.emit()
+        self.update_position.emit(self.position)
 
     def update_position_ui(self):
         self.update_position_label()
