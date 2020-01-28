@@ -35,6 +35,10 @@ class QSoundPlayer(QtWidgets.QWidget, Ui_QSoundPlayer):
         if self.file_path is not None:
             self.load_file()
 
+    @property
+    def sr(self):
+        return self.sound_player.sr
+
     def link_events(self):
         self.btn_play.clicked.connect(self.play_pause)
         self.btn_stop.clicked.connect(self.stop)
