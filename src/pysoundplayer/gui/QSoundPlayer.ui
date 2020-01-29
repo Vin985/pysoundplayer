@@ -195,7 +195,7 @@
   <customwidget>
    <class>QJumpSlider</class>
    <extends>QSlider</extends>
-   <header>QJumpSlider.h</header>
+   <header>qwidgets_extra/QJumpSlider.h</header>
   </customwidget>
  </customwidgets>
  <resources>
