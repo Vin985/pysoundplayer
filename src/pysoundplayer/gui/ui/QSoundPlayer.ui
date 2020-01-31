@@ -101,35 +101,6 @@
       </widget>
      </item>
      <item>
-      <widget class="QPushButton" name="btn_seek">
-       <property name="sizePolicy">
-        <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
-         <horstretch>0</horstretch>
-         <verstretch>0</verstretch>
-        </sizepolicy>
-       </property>
-       <property name="toolTip">
-        <string>Seek</string>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-       <property name="icon">
-        <iconset resource="qsoundplayer.qrc">
-         <normaloff>:/icons/signs</normaloff>:/icons/signs</iconset>
-       </property>
-       <property name="iconSize">
-        <size>
-         <width>20</width>
-         <height>20</height>
-        </size>
-       </property>
-       <property name="flat">
-        <bool>true</bool>
-       </property>
-      </widget>
-     </item>
-     <item>
       <spacer name="horizontalSpacer_4">
        <property name="orientation">
         <enum>Qt::Horizontal</enum>
@@ -195,7 +166,7 @@
   <customwidget>
    <class>QJumpSlider</class>
    <extends>QSlider</extends>
-   <header>qwidgets_extra/QJumpSlider.h</header>
+   <header>pysoundplayer/gui/QJumpSlider.h</header>
   </customwidget>
  </customwidgets>
  <resources>

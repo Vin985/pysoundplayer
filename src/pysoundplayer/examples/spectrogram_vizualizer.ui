@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>SpectrogramVizualizer</class>
+ <widget class="QMainWindow" name="SpectrogramVizualizer">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>800</width>
+    <height>600</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QVBoxLayout" name="verticalLayout">
+    <item>
+     <widget class="QSpectrogramViewer" name="spectrogram_viewer" native="true"/>
+    </item>
+    <item>
+     <widget class="QSoundPlayer" name="sound_player" native="true"/>
+    </item>
+    <item>
+     <widget class="QSpectrogramOptions" name="spectrogram_options" native="true"/>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>800</width>
+     <height>23</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>QSpectrogramViewer</class>
+   <extends>QWidget</extends>
+   <header>pysoundplayer/gui/QSpectrogramViewer.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>QSpectrogramOptions</class>
+   <extends>QWidget</extends>
+   <header>pysoundplayer/gui/QSpectrogramOptions.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>QSoundPlayer</class>
+   <extends>QWidget</extends>
+   <header>pysoundplayer/gui/QSoundPlayer.h</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
+ <resources/>
+ <connections/>
+</ui>

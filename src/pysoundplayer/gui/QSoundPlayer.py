@@ -4,7 +4,7 @@ from PySide2 import QtCore, QtWidgets
 import datetime as dt
 
 from ..sound_player import SoundPlayer
-from .QSoundPlayer_ui import Ui_QSoundPlayer
+from .ui.QSoundPlayer_ui import Ui_QSoundPlayer
 
 
 class QSoundPlayer(QtWidgets.QWidget, Ui_QSoundPlayer):
@@ -25,7 +25,6 @@ class QSoundPlayer(QtWidgets.QWidget, Ui_QSoundPlayer):
         self.file_path = file_path
         self.sound_player = SoundPlayer()
         self.position = 0.0
-        self.duration = 0.0
         self.last_update = None
         self.playing = False
         self.update_timer = QtCore.QTimer()
@@ -37,13 +36,15 @@ class QSoundPlayer(QtWidgets.QWidget, Ui_QSoundPlayer):
 
     @property
     def sr(self):
-        return self.sound_player.sr
+        return self.audio.sr
+
+    @property
+    def duration(self):
+        return self.audio.duration
 
     def link_events(self):
         self.btn_play.clicked.connect(self.play_pause)
         self.btn_stop.clicked.connect(self.stop)
-        self.btn_seek.clicked.connect(
-            self.seek)
         self.cb_playbackSpeed.activated.connect(
             self.change_playback_speed)
         self.update_timer.timeout.connect(self.update_sound_position)
@@ -55,10 +56,10 @@ class QSoundPlayer(QtWidgets.QWidget, Ui_QSoundPlayer):
         if self.file_path is None:
             print("Error, no file path found, please provide one")
             return
-        self.sound_player.load(self.file_path)
-        self.duration = self.sound_player.duration
+        self.audio = self.sound_player.load(self.file_path)
         self.slider_time.setMaximum(self.duration / self.SLIDER_INTERVAL)
         self.update_position_label()
+        return self.audio
 
     def init_playback_speeds(self):
         self.cb_playbackSpeed.clear()
