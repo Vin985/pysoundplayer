@@ -87,7 +87,6 @@ class SoundPlayer():
     def seek(self, pos):
         pos_frame = int(pos * self.audio.sr)
         self.pos = pos_frame
-        print(self.pos)
 
     def reset_stream(self):
         self.stream.close()
