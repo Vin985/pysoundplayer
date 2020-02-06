@@ -1,6 +1,9 @@
 import functools
 import itertools
-
+import librosa
+from matplotlib import cm
+from .colourMap import getColourMap
+import colorcet as cc
 import numpy as np
 import webcolors
 from PIL import Image, ImageEnhance, ImageOps
@@ -12,18 +15,13 @@ class ImageGenerator(OptionsObject):
     DEFAULT_OPTIONS = {"color_masks_str": ['red', 'lime', 'blue'],
                        "composite_ffts": [128, 512, 2048],
                        "contrast": 0,
-                       "invert_colors": False}
+                       "invert_colors": False,
+                       "height": 400,
+                       "pixels_in_sec": 200}
 
     def __init__(self, image_options=None):
         super().__init__(options=image_options)
         self._color_masks = None
-
-    def __getitem__(self, index):
-        if index in self.options:
-            return self.options[index]
-        elif index in self.DEFAULT_OPTIONS:
-            return self.DEFAULT_OPTIONS[index]
-        raise KeyError(index + " option does not exist")
 
     @property
     def color_masks(self):
@@ -45,32 +43,46 @@ class ImageGenerator(OptionsObject):
         spec = spec.astype("float32")
         # Normalize spectrogram in [0:1]
         # TODO: use librosa normalize?
-        min = spec.min(axis=None)
-        max = spec.max(axis=None)
-        spec -= min
-        spec /= (max - min)
+        spec_min = spec.min(axis=None)
+        spec_max = spec.max(axis=None)
+        spec -= spec_min
+        spec /= (spec_max - spec_min)
+        # spec = librosa.util.normalize(spec)
         if self["invert_colors"]:
             spec = 1 - spec
+        spec = cc.cm["rainbow"](spec)
+        #spec = cm.get_cmap("Reds")(spec)
+        #spec = getColourMap()(spec)
         spec = spec * 255
         # flip upside down since writing image start from top left
         spec = np.flipud(spec)
-        return spec
+        return np.uint8(spec)
 
     def spec2img(self,
-                 spec,
+                 spectrogram,
                  color_mask=(255, 0, 0),
-                 size=None,
+                 size=-1,
                  resize_method=Image.BILINEAR):
 
-        spec = self.__prepare_spectrogram(spec)
+        spec = self.__prepare_spectrogram(spectrogram.spec)
+
+        img = Image.fromarray(spec)
 
         # Create image from float points
-        img = Image.fromarray(spec, mode='F')
-        # Convert in grayscale
-        img = img.convert("L")
-        # Colorise spectrogram
-        if color_mask:
-            img = ImageOps.colorize(img, (0, 0, 0), color_mask)
+        # img = Image.fromarray(spec, mode='F')
+        # # Convert in grayscale
+        # img = img.convert("L")
+        # # Colorise spectrogram
+        # if color_mask:
+        #     #img = ImageOps.colorize(img, (0, 0, 0), color_mask)
+        #     print(img)
+        #     print(spec)
+        #     print(np.amin(spec))
+        #     print(np.amax(spec))
+        #     print(np.mean(spec))
+        #     print(img.getextrema())
+        #     img = ImageOps.colorize(
+        #         img, (0, 0, 255), (255, 0, 0), (255, 255, 0), midpoint=int(np.mean(spec)))
 
         # enhance contrast
         if self["contrast"]:
@@ -80,6 +92,9 @@ class ImageGenerator(OptionsObject):
                 c_enh = ImageEnhance.Contrast(img)
                 img = c_enh.enhance(self["contrast"])
 
+        if size == -1:
+            size = (self.sec2pixels(spectrogram.duration), self["height"])
+
         if size is not None:
             img = img.resize(size, resize_method)
 
@@ -87,7 +102,7 @@ class ImageGenerator(OptionsObject):
 
     def create_composite_part(self, spec, color_mask):
         img = self.spec2img(
-            spec.spec, color_mask, size=(int(299 * spec.duration), 400))
+            spec, color_mask)
         return np.asarray(img)
 
     def generate_composite(self, sample):
@@ -105,3 +120,13 @@ class ImageGenerator(OptionsObject):
         res = functools.reduce(np.add, res)
         composite = Image.fromarray(res, mode='RGB')
         return composite
+
+    def sec2pixels(self, sec, to_int=True):
+        pix = self["pixels_in_sec"] * sec
+        if to_int:
+            return int(pix)
+        return pix
+
+    def pixels2sec(self, pixels):
+        sec = pixels / self["pixels_in_sec"]
+        return sec

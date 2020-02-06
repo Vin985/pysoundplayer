@@ -5,27 +5,22 @@ from ..common.options_object import OptionsObject
 
 class Spectrogram(OptionsObject):
 
-    DEFAULT_OPTIONS = {"n_fft": 512, "to_db": True, "pcen": True,
-                       "remove_noise": None, "normalize": False,
-                       "hop_length": None, "window": 'hann', "scale": "Mel",
+    DEFAULT_OPTIONS = {"n_fft": 512, "to_db": True, "pcen": False,
+                       "remove_noise": False, "normalize": False,
+                       "hop_length": None, "window": 'hann', "scale": "Linear",
                        "nr_hist_rel_size": 2, "nr_N": 0.1, "nr_window_smoothing": 5}
+    ACCEPTED_VALUES = {"n_fft": [2**x for x in range(7, 12)],
+                       "scale": ["Linear", "Mel"],
+                       "window": ["hann", "hamming", "boxcar", "bartlett"]}
 
     def __init__(self, audio, spec_options=None):
         super().__init__(options=spec_options)
         self.audio = audio
-        # self.n_fft = n_fft
-        # self.to_db = to_db
-        # self.pcen = pcen
-        # self.denoised = remove_noise
-        # self.window = spec_window
-        # self.hop_length = spec_hop_length
-        # self.scale = scale
-        # self.normalize = normalize
-        # self.nr_N = nr_N
-        # self.nr_hist_rel_size = nr_hist_rel_size
-        # self.nr_window_smoothing = nr_window_smoothing
-
         self.spec = self.create_spectrogram()
+
+    @property
+    def duration(self):
+        return self.audio.duration
 
     def create_spectrogram(self):
         spectro = librosa.stft(

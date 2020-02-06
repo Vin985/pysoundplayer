@@ -1,5 +1,5 @@
 
-from PySide2 import QtCore, QtWidgets
+from PySide2 import QtCore, QtWidgets, QtGui
 
 import datetime as dt
 
@@ -30,6 +30,7 @@ class QSoundPlayer(QtWidgets.QWidget, Ui_QSoundPlayer):
         self.update_timer = QtCore.QTimer()
         self.sound_speed = 1
         self.link_events()
+        self.define_shortcuts()
         self.init_playback_speeds()
         if self.file_path is not None:
             self.load_file()
@@ -50,6 +51,17 @@ class QSoundPlayer(QtWidgets.QWidget, Ui_QSoundPlayer):
         self.update_timer.timeout.connect(self.update_sound_position)
         self.slider_time.seek_position.connect(self.seek_slider)
 
+    def define_shortcuts(self):
+        QtWidgets.QShortcut(QtGui.QKeySequence(QtCore.Qt.Key_Space),
+                            self, self.btn_play.click)
+
+    def init_playback_speeds(self):
+        self.cb_playbackSpeed.clear()
+        self.cb_playbackSpeed.insertItems(
+            0, [str(x) for x in self.SOUNDS_SPEEDS])
+        self.cb_playbackSpeed.setCurrentIndex(
+            self.SOUNDS_SPEEDS.index(self.sound_speed))
+
     def load_file(self, file_path=None):
         if file_path is not None:
             self.file_path = file_path
@@ -60,13 +72,6 @@ class QSoundPlayer(QtWidgets.QWidget, Ui_QSoundPlayer):
         self.slider_time.setMaximum(self.duration / self.SLIDER_INTERVAL)
         self.update_position_label()
         return self.audio
-
-    def init_playback_speeds(self):
-        self.cb_playbackSpeed.clear()
-        self.cb_playbackSpeed.insertItems(
-            0, [str(x) for x in self.SOUNDS_SPEEDS])
-        self.cb_playbackSpeed.setCurrentIndex(
-            self.SOUNDS_SPEEDS.index(self.sound_speed))
 
     def play_pause(self):
         if self.playing:
@@ -122,20 +127,20 @@ class QSoundPlayer(QtWidgets.QWidget, Ui_QSoundPlayer):
     def update_sound_position(self):
 
         # TODO: Use sound player information instead!
-        currentTime = dt.datetime.now()
-        increment = (currentTime - self.last_update).total_seconds()
-        self.position += increment * self.sound_speed
-        self.last_update = currentTime
-        if self.position > self.duration:  # self.sound_player.done:
-            self.position = self.duration
-            self.btn_play.click()
+        if self.playing:
+            currentTime = dt.datetime.now()
+            increment = (currentTime - self.last_update).total_seconds()
+            self.position += increment * self.sound_speed
+            self.last_update = currentTime
+            if self.position > self.duration:  # self.sound_player.done:
+                self.position = self.duration
+                self.btn_play.click()
         self.update_position_ui()
-
-        self.update_position.emit(self.position)
 
     def update_position_ui(self):
         self.update_position_label()
         self.update_slider()
+        self.update_position.emit(self.position)
 
     def update_slider(self):
         slider_pos = int(self.position / self.SLIDER_INTERVAL)
