@@ -1,188 +1,244 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'QSpectrogramOptions.ui',
-# licensing of 'QSpectrogramOptions.ui' applies.
-#
-# Created: Tue Feb  4 16:33:56 2020
-#      by: pyside2-uic  running on PySide2 5.12.2
-#
-# WARNING! All changes made in this file will be lost!
+################################################################################
+## Form generated from reading UI file 'QSpectrogramOptions.ui'
+##
+## Created by: Qt User Interface Compiler version 5.14.1
+##
+## WARNING! All changes made in this file will be lost when recompiling UI file!
+################################################################################
 
-from PySide2 import QtCore, QtGui, QtWidgets
+from PySide2.QtCore import (QCoreApplication, QMetaObject, QObject, QPoint,
+    QRect, QSize, QUrl, Qt)
+from PySide2.QtGui import (QBrush, QColor, QConicalGradient, QCursor, QFont,
+    QFontDatabase, QIcon, QLinearGradient, QPalette, QPainter, QPixmap,
+    QRadialGradient)
+from PySide2.QtWidgets import *
+
 
 class Ui_SpectrogramOptions(object):
     def setupUi(self, SpectrogramOptions):
-        SpectrogramOptions.setObjectName("SpectrogramOptions")
+        if SpectrogramOptions.objectName():
+            SpectrogramOptions.setObjectName(u"SpectrogramOptions")
         SpectrogramOptions.resize(878, 283)
-        self.horizontalLayout_2 = QtWidgets.QHBoxLayout(SpectrogramOptions)
-        self.horizontalLayout_2.setObjectName("horizontalLayout_2")
-        self.groupBox = QtWidgets.QGroupBox(SpectrogramOptions)
-        self.groupBox.setObjectName("groupBox")
-        self.gridLayout_7 = QtWidgets.QGridLayout(self.groupBox)
-        self.gridLayout_7.setObjectName("gridLayout_7")
-        self.cb_followSound = QtWidgets.QCheckBox(self.groupBox)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Maximum, QtWidgets.QSizePolicy.Fixed)
+        self.horizontalLayout_2 = QHBoxLayout(SpectrogramOptions)
+        self.horizontalLayout_2.setObjectName(u"horizontalLayout_2")
+        self.groupBox = QGroupBox(SpectrogramOptions)
+        self.groupBox.setObjectName(u"groupBox")
+        self.gridLayout_7 = QGridLayout(self.groupBox)
+        self.gridLayout_7.setObjectName(u"gridLayout_7")
+        self.cb_followSound = QCheckBox(self.groupBox)
+        self.cb_followSound.setObjectName(u"cb_followSound")
+        sizePolicy = QSizePolicy(QSizePolicy.Maximum, QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.cb_followSound.sizePolicy().hasHeightForWidth())
         self.cb_followSound.setSizePolicy(sizePolicy)
-        self.cb_followSound.setObjectName("cb_followSound")
+
         self.gridLayout_7.addWidget(self.cb_followSound, 0, 0, 1, 3)
-        self.cb_pcen = QtWidgets.QCheckBox(self.groupBox)
-        self.cb_pcen.setObjectName("cb_pcen")
+
+        self.cb_pcen = QCheckBox(self.groupBox)
+        self.cb_pcen.setObjectName(u"cb_pcen")
+
         self.gridLayout_7.addWidget(self.cb_pcen, 1, 0, 1, 1)
-        self.cb_remove_noise = QtWidgets.QCheckBox(self.groupBox)
-        self.cb_remove_noise.setObjectName("cb_remove_noise")
+
+        self.cb_remove_noise = QCheckBox(self.groupBox)
+        self.cb_remove_noise.setObjectName(u"cb_remove_noise")
+
         self.gridLayout_7.addWidget(self.cb_remove_noise, 1, 3, 1, 1)
-        self.cb_todb = QtWidgets.QCheckBox(self.groupBox)
-        self.cb_todb.setObjectName("cb_todb")
+
+        self.cb_todb = QCheckBox(self.groupBox)
+        self.cb_todb.setObjectName(u"cb_todb")
+
         self.gridLayout_7.addWidget(self.cb_todb, 1, 4, 1, 1)
-        self.cb_normalize = QtWidgets.QCheckBox(self.groupBox)
-        self.cb_normalize.setObjectName("cb_normalize")
+
+        self.cb_normalize = QCheckBox(self.groupBox)
+        self.cb_normalize.setObjectName(u"cb_normalize")
+
         self.gridLayout_7.addWidget(self.cb_normalize, 1, 5, 1, 1)
-        self.label_40 = QtWidgets.QLabel(self.groupBox)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Maximum, QtWidgets.QSizePolicy.Preferred)
-        sizePolicy.setHorizontalStretch(0)
-        sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.label_40.sizePolicy().hasHeightForWidth())
-        self.label_40.setSizePolicy(sizePolicy)
-        self.label_40.setObjectName("label_40")
+
+        self.label_40 = QLabel(self.groupBox)
+        self.label_40.setObjectName(u"label_40")
+        sizePolicy1 = QSizePolicy(QSizePolicy.Maximum, QSizePolicy.Preferred)
+        sizePolicy1.setHorizontalStretch(0)
+        sizePolicy1.setVerticalStretch(0)
+        sizePolicy1.setHeightForWidth(self.label_40.sizePolicy().hasHeightForWidth())
+        self.label_40.setSizePolicy(sizePolicy1)
+
         self.gridLayout_7.addWidget(self.label_40, 2, 0, 1, 2)
-        self.combo_fft = QtWidgets.QComboBox(self.groupBox)
-        self.combo_fft.setObjectName("combo_fft")
+
+        self.combo_fft = QComboBox(self.groupBox)
+        self.combo_fft.setObjectName(u"combo_fft")
+
         self.gridLayout_7.addWidget(self.combo_fft, 2, 3, 1, 1)
-        self.label_38 = QtWidgets.QLabel(self.groupBox)
-        self.label_38.setObjectName("label_38")
+
+        self.label_38 = QLabel(self.groupBox)
+        self.label_38.setObjectName(u"label_38")
+
         self.gridLayout_7.addWidget(self.label_38, 2, 4, 1, 1)
-        self.combo_window = QtWidgets.QComboBox(self.groupBox)
-        self.combo_window.setObjectName("combo_window")
+
+        self.combo_window = QComboBox(self.groupBox)
+        self.combo_window.setObjectName(u"combo_window")
+
         self.gridLayout_7.addWidget(self.combo_window, 2, 5, 1, 1)
-        self.label_39 = QtWidgets.QLabel(self.groupBox)
-        self.label_39.setObjectName("label_39")
+
+        self.label_39 = QLabel(self.groupBox)
+        self.label_39.setObjectName(u"label_39")
+
         self.gridLayout_7.addWidget(self.label_39, 3, 0, 1, 3)
-        self.combo_hop_length = QtWidgets.QComboBox(self.groupBox)
-        self.combo_hop_length.setObjectName("combo_hop_length")
+
+        self.combo_hop_length = QComboBox(self.groupBox)
+        self.combo_hop_length.setObjectName(u"combo_hop_length")
+
         self.gridLayout_7.addWidget(self.combo_hop_length, 3, 3, 1, 1)
-        self.label_37 = QtWidgets.QLabel(self.groupBox)
-        self.label_37.setObjectName("label_37")
+
+        self.label_37 = QLabel(self.groupBox)
+        self.label_37.setObjectName(u"label_37")
+
         self.gridLayout_7.addWidget(self.label_37, 3, 4, 1, 1)
-        self.combo_scale = QtWidgets.QComboBox(self.groupBox)
-        self.combo_scale.setObjectName("combo_scale")
+
+        self.combo_scale = QComboBox(self.groupBox)
+        self.combo_scale.setObjectName(u"combo_scale")
+
         self.gridLayout_7.addWidget(self.combo_scale, 3, 5, 1, 1)
-        self.label_41 = QtWidgets.QLabel(self.groupBox)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Preferred)
-        sizePolicy.setHorizontalStretch(0)
-        sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.label_41.sizePolicy().hasHeightForWidth())
-        self.label_41.setSizePolicy(sizePolicy)
-        self.label_41.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignVCenter)
-        self.label_41.setObjectName("label_41")
+
+        self.label_41 = QLabel(self.groupBox)
+        self.label_41.setObjectName(u"label_41")
+        sizePolicy2 = QSizePolicy(QSizePolicy.Fixed, QSizePolicy.Preferred)
+        sizePolicy2.setHorizontalStretch(0)
+        sizePolicy2.setVerticalStretch(0)
+        sizePolicy2.setHeightForWidth(self.label_41.sizePolicy().hasHeightForWidth())
+        self.label_41.setSizePolicy(sizePolicy2)
+        self.label_41.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignVCenter)
+
         self.gridLayout_7.addWidget(self.label_41, 4, 0, 1, 3)
-        self.combo_specType = QtWidgets.QComboBox(self.groupBox)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Fixed)
-        sizePolicy.setHorizontalStretch(0)
-        sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.combo_specType.sizePolicy().hasHeightForWidth())
-        self.combo_specType.setSizePolicy(sizePolicy)
-        self.combo_specType.setObjectName("combo_specType")
+
+        self.combo_specType = QComboBox(self.groupBox)
         self.combo_specType.addItem("")
         self.combo_specType.addItem("")
+        self.combo_specType.setObjectName(u"combo_specType")
+        sizePolicy3 = QSizePolicy(QSizePolicy.Minimum, QSizePolicy.Fixed)
+        sizePolicy3.setHorizontalStretch(0)
+        sizePolicy3.setVerticalStretch(0)
+        sizePolicy3.setHeightForWidth(self.combo_specType.sizePolicy().hasHeightForWidth())
+        self.combo_specType.setSizePolicy(sizePolicy3)
+
         self.gridLayout_7.addWidget(self.combo_specType, 4, 3, 1, 1)
+
+
         self.horizontalLayout_2.addWidget(self.groupBox)
-        self.groupBox_2 = QtWidgets.QGroupBox(SpectrogramOptions)
-        self.groupBox_2.setObjectName("groupBox_2")
-        self.gridLayout = QtWidgets.QGridLayout(self.groupBox_2)
-        self.gridLayout.setObjectName("gridLayout")
-        self.label_33 = QtWidgets.QLabel(self.groupBox_2)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Maximum, QtWidgets.QSizePolicy.Preferred)
-        sizePolicy.setHorizontalStretch(0)
-        sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.label_33.sizePolicy().hasHeightForWidth())
-        self.label_33.setSizePolicy(sizePolicy)
-        self.label_33.setObjectName("label_33")
+
+        self.groupBox_2 = QGroupBox(SpectrogramOptions)
+        self.groupBox_2.setObjectName(u"groupBox_2")
+        self.gridLayout = QGridLayout(self.groupBox_2)
+        self.gridLayout.setObjectName(u"gridLayout")
+        self.label_33 = QLabel(self.groupBox_2)
+        self.label_33.setObjectName(u"label_33")
+        sizePolicy1.setHeightForWidth(self.label_33.sizePolicy().hasHeightForWidth())
+        self.label_33.setSizePolicy(sizePolicy1)
+
         self.gridLayout.addWidget(self.label_33, 0, 0, 1, 2)
-        self.label_35 = QtWidgets.QLabel(self.groupBox_2)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Maximum, QtWidgets.QSizePolicy.Preferred)
-        sizePolicy.setHorizontalStretch(0)
-        sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.label_35.sizePolicy().hasHeightForWidth())
-        self.label_35.setSizePolicy(sizePolicy)
+
+        self.label_35 = QLabel(self.groupBox_2)
+        self.label_35.setObjectName(u"label_35")
+        sizePolicy1.setHeightForWidth(self.label_35.sizePolicy().hasHeightForWidth())
+        self.label_35.setSizePolicy(sizePolicy1)
         self.label_35.setWordWrap(True)
-        self.label_35.setObjectName("label_35")
+
         self.gridLayout.addWidget(self.label_35, 2, 0, 1, 2)
-        self.label_34 = QtWidgets.QLabel(self.groupBox_2)
-        self.label_34.setObjectName("label_34")
+
+        self.label_34 = QLabel(self.groupBox_2)
+        self.label_34.setObjectName(u"label_34")
+
         self.gridLayout.addWidget(self.label_34, 3, 0, 1, 2)
-        self.spin_height = QtWidgets.QSpinBox(self.groupBox_2)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Fixed)
-        sizePolicy.setHorizontalStretch(0)
-        sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.spin_height.sizePolicy().hasHeightForWidth())
-        self.spin_height.setSizePolicy(sizePolicy)
-        self.spin_height.setObjectName("spin_height")
+
+        self.spin_height = QSpinBox(self.groupBox_2)
+        self.spin_height.setObjectName(u"spin_height")
+        sizePolicy4 = QSizePolicy(QSizePolicy.Preferred, QSizePolicy.Fixed)
+        sizePolicy4.setHorizontalStretch(0)
+        sizePolicy4.setVerticalStretch(0)
+        sizePolicy4.setHeightForWidth(self.spin_height.sizePolicy().hasHeightForWidth())
+        self.spin_height.setSizePolicy(sizePolicy4)
+        self.spin_height.setKeyboardTracking(False)
+        self.spin_height.setMaximum(999)
+
         self.gridLayout.addWidget(self.spin_height, 3, 2, 1, 1)
-        self.slider_contrast = QtWidgets.QSlider(self.groupBox_2)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Fixed)
-        sizePolicy.setHorizontalStretch(0)
-        sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.slider_contrast.sizePolicy().hasHeightForWidth())
-        self.slider_contrast.setSizePolicy(sizePolicy)
-        self.slider_contrast.setOrientation(QtCore.Qt.Horizontal)
-        self.slider_contrast.setObjectName("slider_contrast")
+
+        self.slider_contrast = QSlider(self.groupBox_2)
+        self.slider_contrast.setObjectName(u"slider_contrast")
+        sizePolicy4.setHeightForWidth(self.slider_contrast.sizePolicy().hasHeightForWidth())
+        self.slider_contrast.setSizePolicy(sizePolicy4)
+        self.slider_contrast.setMinimum(0)
+        self.slider_contrast.setMaximum(5)
+        self.slider_contrast.setSingleStep(5)
+        self.slider_contrast.setTracking(False)
+        self.slider_contrast.setOrientation(Qt.Horizontal)
+
         self.gridLayout.addWidget(self.slider_contrast, 1, 2, 1, 1)
-        self.label_36 = QtWidgets.QLabel(self.groupBox_2)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Maximum, QtWidgets.QSizePolicy.Preferred)
-        sizePolicy.setHorizontalStretch(0)
-        sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.label_36.sizePolicy().hasHeightForWidth())
-        self.label_36.setSizePolicy(sizePolicy)
-        self.label_36.setObjectName("label_36")
+
+        self.label_36 = QLabel(self.groupBox_2)
+        self.label_36.setObjectName(u"label_36")
+        sizePolicy1.setHeightForWidth(self.label_36.sizePolicy().hasHeightForWidth())
+        self.label_36.setSizePolicy(sizePolicy1)
+
         self.gridLayout.addWidget(self.label_36, 1, 0, 1, 1)
-        self.spin_pix_in_sec = QtWidgets.QSpinBox(self.groupBox_2)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Fixed)
-        sizePolicy.setHorizontalStretch(0)
-        sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.spin_pix_in_sec.sizePolicy().hasHeightForWidth())
-        self.spin_pix_in_sec.setSizePolicy(sizePolicy)
-        self.spin_pix_in_sec.setObjectName("spin_pix_in_sec")
+
+        self.spin_pix_in_sec = QSpinBox(self.groupBox_2)
+        self.spin_pix_in_sec.setObjectName(u"spin_pix_in_sec")
+        sizePolicy4.setHeightForWidth(self.spin_pix_in_sec.sizePolicy().hasHeightForWidth())
+        self.spin_pix_in_sec.setSizePolicy(sizePolicy4)
+        self.spin_pix_in_sec.setKeyboardTracking(False)
+        self.spin_pix_in_sec.setMinimum(0)
+        self.spin_pix_in_sec.setMaximum(999)
+
         self.gridLayout.addWidget(self.spin_pix_in_sec, 2, 2, 1, 1)
-        self.cb_invert = QtWidgets.QCheckBox(self.groupBox_2)
-        self.cb_invert.setObjectName("cb_invert")
-        self.gridLayout.addWidget(self.cb_invert, 4, 0, 1, 2)
-        spacerItem = QtWidgets.QSpacerItem(378, 78, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
-        self.gridLayout.addItem(spacerItem, 5, 0, 1, 3)
-        self.combo_color_map = QtWidgets.QComboBox(self.groupBox_2)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Fixed)
-        sizePolicy.setHorizontalStretch(0)
-        sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.combo_color_map.sizePolicy().hasHeightForWidth())
-        self.combo_color_map.setSizePolicy(sizePolicy)
-        self.combo_color_map.setObjectName("combo_color_map")
+
+        self.cb_invert_colors = QCheckBox(self.groupBox_2)
+        self.cb_invert_colors.setObjectName(u"cb_invert_colors")
+
+        self.gridLayout.addWidget(self.cb_invert_colors, 4, 0, 1, 2)
+
+        self.verticalSpacer_4 = QSpacerItem(378, 78, QSizePolicy.Minimum, QSizePolicy.Expanding)
+
+        self.gridLayout.addItem(self.verticalSpacer_4, 5, 0, 1, 3)
+
+        self.combo_color_map = QComboBox(self.groupBox_2)
+        self.combo_color_map.setObjectName(u"combo_color_map")
+        sizePolicy4.setHeightForWidth(self.combo_color_map.sizePolicy().hasHeightForWidth())
+        self.combo_color_map.setSizePolicy(sizePolicy4)
+
         self.gridLayout.addWidget(self.combo_color_map, 0, 2, 1, 1)
+
+
         self.horizontalLayout_2.addWidget(self.groupBox_2)
 
+
         self.retranslateUi(SpectrogramOptions)
-        QtCore.QMetaObject.connectSlotsByName(SpectrogramOptions)
+
+        QMetaObject.connectSlotsByName(SpectrogramOptions)
+    # setupUi
 
     def retranslateUi(self, SpectrogramOptions):
-        SpectrogramOptions.setWindowTitle(QtWidgets.QApplication.translate("SpectrogramOptions", "Form", None, -1))
-        self.groupBox.setTitle(QtWidgets.QApplication.translate("SpectrogramOptions", "Spectrogram", None, -1))
-        self.cb_followSound.setText(QtWidgets.QApplication.translate("SpectrogramOptions", "follow sound", None, -1))
-        self.cb_pcen.setText(QtWidgets.QApplication.translate("SpectrogramOptions", "Use PCEN", None, -1))
-        self.cb_remove_noise.setText(QtWidgets.QApplication.translate("SpectrogramOptions", "Remove noise", None, -1))
-        self.cb_todb.setText(QtWidgets.QApplication.translate("SpectrogramOptions", "To dB", None, -1))
-        self.cb_normalize.setText(QtWidgets.QApplication.translate("SpectrogramOptions", "Normalize", None, -1))
-        self.label_40.setText(QtWidgets.QApplication.translate("SpectrogramOptions", "n_fft", None, -1))
-        self.label_38.setText(QtWidgets.QApplication.translate("SpectrogramOptions", "Window type", None, -1))
-        self.label_39.setText(QtWidgets.QApplication.translate("SpectrogramOptions", "hop length", None, -1))
-        self.label_37.setText(QtWidgets.QApplication.translate("SpectrogramOptions", "Scale", None, -1))
-        self.label_41.setText(QtWidgets.QApplication.translate("SpectrogramOptions", "spectrogram type:", None, -1))
-        self.combo_specType.setItemText(0, QtWidgets.QApplication.translate("SpectrogramOptions", "audible range", None, -1))
-        self.combo_specType.setItemText(1, QtWidgets.QApplication.translate("SpectrogramOptions", "ultra sonic range", None, -1))
-        self.groupBox_2.setTitle(QtWidgets.QApplication.translate("SpectrogramOptions", "Image", None, -1))
-        self.label_33.setText(QtWidgets.QApplication.translate("SpectrogramOptions", "Color map", None, -1))
-        self.label_35.setText(QtWidgets.QApplication.translate("SpectrogramOptions", "Number of pixels in a second", None, -1))
-        self.label_34.setText(QtWidgets.QApplication.translate("SpectrogramOptions", "Height", None, -1))
-        self.label_36.setText(QtWidgets.QApplication.translate("SpectrogramOptions", "Color contrast", None, -1))
-        self.cb_invert.setText(QtWidgets.QApplication.translate("SpectrogramOptions", "Invert colors", None, -1))
+        SpectrogramOptions.setWindowTitle(QCoreApplication.translate("SpectrogramOptions", u"Form", None))
+        self.groupBox.setTitle(QCoreApplication.translate("SpectrogramOptions", u"Spectrogram", None))
+        self.cb_followSound.setText(QCoreApplication.translate("SpectrogramOptions", u"follow sound", None))
+        self.cb_pcen.setText(QCoreApplication.translate("SpectrogramOptions", u"Use PCEN", None))
+        self.cb_remove_noise.setText(QCoreApplication.translate("SpectrogramOptions", u"Remove noise", None))
+        self.cb_todb.setText(QCoreApplication.translate("SpectrogramOptions", u"To dB", None))
+        self.cb_normalize.setText(QCoreApplication.translate("SpectrogramOptions", u"Normalize", None))
+        self.label_40.setText(QCoreApplication.translate("SpectrogramOptions", u"n_fft", None))
+        self.label_38.setText(QCoreApplication.translate("SpectrogramOptions", u"Window type", None))
+        self.label_39.setText(QCoreApplication.translate("SpectrogramOptions", u"hop length", None))
+        self.label_37.setText(QCoreApplication.translate("SpectrogramOptions", u"Scale", None))
+        self.label_41.setText(QCoreApplication.translate("SpectrogramOptions", u"spectrogram type:", None))
+        self.combo_specType.setItemText(0, QCoreApplication.translate("SpectrogramOptions", u"audible range", None))
+        self.combo_specType.setItemText(1, QCoreApplication.translate("SpectrogramOptions", u"ultra sonic range", None))
+
+        self.groupBox_2.setTitle(QCoreApplication.translate("SpectrogramOptions", u"Image", None))
+        self.label_33.setText(QCoreApplication.translate("SpectrogramOptions", u"Color map", None))
+        self.label_35.setText(QCoreApplication.translate("SpectrogramOptions", u"Number of pixels in a second", None))
+        self.label_34.setText(QCoreApplication.translate("SpectrogramOptions", u"Height", None))
+        self.label_36.setText(QCoreApplication.translate("SpectrogramOptions", u"Color contrast", None))
+        self.cb_invert_colors.setText(QCoreApplication.translate("SpectrogramOptions", u"Invert colors", None))
+    # retranslateUi
 

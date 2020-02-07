@@ -18,6 +18,14 @@ class SoundPlayerSettings(QSettings):
         self.options = {self.GROUP_SPECTROGRAM: self.spectrogram_settings(
         ), self.GROUP_IMAGE: self.image_settings()}
 
+    @property
+    def spectrogram_options(self):
+        return self.options[self.GROUP_SPECTROGRAM]
+
+    @property
+    def image_options(self):
+        return self.options[self.GROUP_IMAGE]
+
     def get(self, key, group=None):
         default = repr(self.default_options[group][key])
         tmp = self.value(key, default)
@@ -73,12 +81,12 @@ class SoundPlayerSettings(QSettings):
                 "No entries found for selected context, using default group")
             self.endGroup()
             self.beginGroup(group)
-        res["spec_window"] = self.get_spec_setting("window")
+        res["window"] = self.get_spec_setting("window")
         res["n_fft"] = self.get_spec_setting("n_fft")
         res["pcen"] = self.get_spec_setting("pcen")
         res["to_db"] = self.get_spec_setting("to_db")
         res["normalize"] = self.get_spec_setting("normalize")
-        res["spec_hop_length"] = self.get_spec_setting("hop_length")
+        res["hop_length"] = self.get_spec_setting("hop_length")
         res["scale"] = self.get_spec_setting("scale")
         res["remove_noise"] = self.get_spec_setting("remove_noise")
         res["nr_hist_rel_size"] = self.get_spec_setting("nr_hist_rel_size")
@@ -100,6 +108,7 @@ class SoundPlayerSettings(QSettings):
         res["composite_ffts"] = self.get_image_setting("composite_ffts")
         res["height"] = self.get_image_setting("height")
         res["pixels_in_sec"] = self.get_image_setting("pixels_in_sec")
+        res["color_map"] = self.get_image_setting("color_map")
         # res["composite_ffts"] = [int(i) for i in composite_ffts]
         self.endGroup()
         print(res)

@@ -9,7 +9,7 @@ class Spectrogram(OptionsObject):
                        "remove_noise": False, "normalize": False,
                        "hop_length": None, "window": 'hann', "scale": "Linear",
                        "nr_hist_rel_size": 2, "nr_N": 0.1, "nr_window_smoothing": 5}
-    ACCEPTED_VALUES = {"n_fft": [2**x for x in range(7, 12)],
+    ACCEPTED_VALUES = {"n_fft": [str(2**x) for x in range(7, 12)],
                        "scale": ["Linear", "Mel"],
                        "window": ["hann", "hamming", "boxcar", "bartlett"]}
 
@@ -23,8 +23,10 @@ class Spectrogram(OptionsObject):
         return self.audio.duration
 
     def create_spectrogram(self):
+        hop_length = int(
+            self["hop_length"]) if self["hop_length"] is not None else self["hop_length"]
         spectro = librosa.stft(
-            self.audio.get_data(), self["n_fft"], hop_length=self["hop_length"], window=self["window"])
+            self.audio.get_data(), int(self["n_fft"]), hop_length=hop_length, window=self["window"])
 
         if self["scale"] == "Mel":
             spectro = librosa.feature.melspectrogram(S=spectro)

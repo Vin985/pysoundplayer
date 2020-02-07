@@ -1,12 +1,11 @@
 import functools
 import itertools
-import librosa
-from matplotlib import cm
-from .colourMap import getColourMap
+
 import colorcet as cc
 import numpy as np
 import webcolors
 from PIL import Image, ImageEnhance, ImageOps
+
 from ..common.options_object import OptionsObject
 
 
@@ -17,7 +16,11 @@ class ImageGenerator(OptionsObject):
                        "contrast": 0,
                        "invert_colors": False,
                        "height": 400,
-                       "pixels_in_sec": 200}
+                       "pixels_in_sec": 200,
+                       "color_map": "rainbow"}
+
+    ACCEPTED_VALUES = {"color_map": [
+        key for key in cc.cm.keys() if len(key.split("_")) == 1]}
 
     def __init__(self, image_options=None):
         super().__init__(options=image_options)
@@ -50,7 +53,7 @@ class ImageGenerator(OptionsObject):
         # spec = librosa.util.normalize(spec)
         if self["invert_colors"]:
             spec = 1 - spec
-        spec = cc.cm["rainbow"](spec)
+        spec = cc.cm[self["color_map"]](spec)
         #spec = cm.get_cmap("Reds")(spec)
         #spec = getColourMap()(spec)
         spec = spec * 255

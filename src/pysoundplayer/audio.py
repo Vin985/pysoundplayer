@@ -27,8 +27,10 @@ class Audio():
         done = (end_idx >= self.nframes)
         return (data, end_idx, done)
 
-    def get_spectrogram(self, options):
-        if not self._spec:
+    def get_spectrogram(self, options, recreate=False):
+        if not self._spec or recreate:
+            print("creating spectrogram")
+            print(options)
             self._spec = Spectrogram(self, options)
         return self._spec
 

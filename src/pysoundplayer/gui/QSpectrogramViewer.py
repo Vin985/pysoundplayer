@@ -11,7 +11,7 @@ class QSpectrogramViewer(QtWidgets.QWidget, Ui_SpectrogramViewer):
 
     seek = QtCore.Signal(float)
 
-    def __init__(self, parent=None, audio=None, spectrogram_options=None, image_options=None):
+    def __init__(self, parent=None, audio=None, settings=None):
         super().__init__(parent)
         self.setupUi(self)
         self.bg_image = None
@@ -19,12 +19,13 @@ class QSpectrogramViewer(QtWidgets.QWidget, Ui_SpectrogramViewer):
 
         self._audio = None
         self._spectrogram = None
+        self._image_generator = None
+
         self.sound_marker = None
+        self.marker_position = 0
         self.yscale = 1
 
-        self.spectrogram_options = {} if spectrogram_options is None else spectrogram_options
-        self.image_options = {} if image_options is None else image_options
-        self.image_generator = ImageGenerator(image_options)
+        self.settings = settings
 
         self.audio = audio
         self.setup_graphics_view()
@@ -54,6 +55,7 @@ class QSpectrogramViewer(QtWidgets.QWidget, Ui_SpectrogramViewer):
             self._audio = audio
             self.spectrogram = audio.get_spectrogram(
                 self.spectrogram_options)
+            self.marker_position = 0
 
     @property
     def spectrogram(self):
@@ -62,12 +64,26 @@ class QSpectrogramViewer(QtWidgets.QWidget, Ui_SpectrogramViewer):
     @spectrogram.setter
     def spectrogram(self, spectrogram):
         self._spectrogram = spectrogram
-        self.update_spectrogram()
+        self.display_spectrogram()
 
-    def update_spectrogram(self):
-        # TODO: externalize ratio pixel/duration
+    @property
+    def image_options(self):
+        return self.settings.image_options if self.settings else {}
+
+    @property
+    def spectrogram_options(self):
+        return self.settings.spectrogram_options if self.settings else {}
+
+    @property
+    def image_generator(self):
+        if self._image_generator is None:
+            self._image_generator = ImageGenerator(self.image_options)
+        return self._image_generator
+
+    def display_spectrogram(self):
         # TODO: save image somewhere
         im = self.image_generator.spec2img(self.spectrogram)
+        print(self.image_generator.options)
         # TODO: change events when checkbox is checked
         # if self.checkbox_draw_events.isChecked():
         #     im = self.draw_events(im, max_duration)
@@ -81,7 +97,9 @@ class QSpectrogramViewer(QtWidgets.QWidget, Ui_SpectrogramViewer):
         # Ensure spectrogram graphic is displayed as background
         self.bg_image.setZValue(-100)
         self.bg_image.setPos(0, 0)
-        self.update_sound_marker(0)
+        self.sound_marker = None
+        if self.marker_position:
+            self.update_sound_marker(None)
 
     def display_text(self, text):
         text_item = QGraphicsTextItem()
@@ -92,8 +110,10 @@ class QSpectrogramViewer(QtWidgets.QWidget, Ui_SpectrogramViewer):
 
     def update_sound_marker(self, position_sec):
         # 100 # multiply by step-size in SpecGen()
-        marker_pos = self.image_generator.sec2pixels(position_sec)
-        line = QtCore.QLineF(marker_pos, 0, marker_pos,
+        if position_sec is not None:
+            self.marker_position = self.image_generator.sec2pixels(
+                position_sec)
+        line = QtCore.QLineF(self.marker_position, 0, self.marker_position,
                              self.image_generator["height"])
         if not self.sound_marker:
             penCol = QtGui.QColor()
@@ -125,3 +145,11 @@ class QSpectrogramViewer(QtWidgets.QWidget, Ui_SpectrogramViewer):
 
     def seek_sound(self, pos):
         self.seek.emit(self.image_generator.pixels2sec(pos))
+
+    def update_spectrogram(self):
+        self.spectrogram = self.audio.get_spectrogram(
+            self.spectrogram_options, recreate=True)
+
+    def update_image(self):
+        print("updating image")
+        self.display_spectrogram()
