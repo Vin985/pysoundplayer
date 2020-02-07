@@ -17,7 +17,6 @@ class QSpectrogramOptions(QtWidgets.QWidget, Ui_SpectrogramOptions):
         super().__init__(parent)
         self._settings = None
         self.setupUi(self)
-        self.update_option = self.map_update_option_functions()
         self.update_ui = self.map_update_ui_functions()
         self.link_events()
 
@@ -44,59 +43,52 @@ class QSpectrogramOptions(QtWidgets.QWidget, Ui_SpectrogramOptions):
         self.cb_remove_noise.stateChanged.connect(
             partial(self.update,
                     "remove_noise",
-                    "checkbox",
-                    SoundPlayerSettings.GROUP_SPECTROGRAM))
+                    SoundPlayerSettings.GROUP_SPECTROGRAM,
+                    checkbox=True))
         self.cb_normalize.stateChanged.connect(
             partial(self.update,
                     "normalize",
-                    "checkbox",
-                    SoundPlayerSettings.GROUP_SPECTROGRAM))
+                    SoundPlayerSettings.GROUP_SPECTROGRAM,
+                    checkbox=True))
         self.cb_todb.stateChanged.connect(
             partial(self.update,
                     "to_db",
-                    "checkbox",
-                    SoundPlayerSettings.GROUP_SPECTROGRAM))
+                    SoundPlayerSettings.GROUP_SPECTROGRAM,
+                    checkbox=True))
         self.combo_fft.currentTextChanged.connect(
             partial(self.update,
                     "n_fft",
-                    "combobox",
                     SoundPlayerSettings.GROUP_SPECTROGRAM))
         self.combo_scale.currentTextChanged.connect(
             partial(self.update,
                     "scale",
-                    "combobox",
                     SoundPlayerSettings.GROUP_SPECTROGRAM))
         self.combo_window.currentTextChanged.connect(
             partial(self.update,
                     "window",
-                    "combobox",
                     SoundPlayerSettings.GROUP_SPECTROGRAM))
 
         # Display
         self.cb_invert_colors.stateChanged.connect(
             partial(self.update,
                     "invert_colors",
-                    "checkbox",
-                    SoundPlayerSettings.GROUP_IMAGE))
+                    SoundPlayerSettings.GROUP_IMAGE,
+                    checkbox=True))
         self.spin_pix_in_sec.valueChanged.connect(
             partial(self.update,
                     "pixels_in_sec",
-                    "spinbox",
                     SoundPlayerSettings.GROUP_IMAGE))
         self.spin_height.valueChanged.connect(
             partial(self.update,
                     "height",
-                    "spinbox",
                     SoundPlayerSettings.GROUP_IMAGE))
         self.combo_color_map.currentTextChanged.connect(
             partial(self.update,
                     "color_map",
-                    "combobox",
                     SoundPlayerSettings.GROUP_IMAGE))
         self.slider_contrast.valueChanged.connect(
             partial(self.update,
                     "contrast",
-                    "slider",
                     SoundPlayerSettings.GROUP_IMAGE))
 
     # associate a fonction to update a value from a specific ui element
@@ -115,46 +107,18 @@ class QSpectrogramOptions(QtWidgets.QWidget, Ui_SpectrogramOptions):
                "contrast": partial(self.update_slider, self.slider_contrast)
                }
         return res
-        # self.update_ui["contrast"] = self.slider_contrast
-        # self.update_ui["height"] = self.spin_height
-        # self.update_ui["pixels_in_sec"] = self.spin_pix_in_sec
-        # self.update_ui["n_fft"] = self.combo_fft
 
-        # DEFAULT_OPTIONS = {"n_fft": 512, "to_db": True, "pcen": False,
-        #                    "remove_noise": None, "normalize": False,
-        #                    "hop_length": None, "window": 'hann', "scale": "Linear",
-        #                    "nr_hist_rel_size": 2, "nr_N": 0.1, "nr_window_smoothing": 5}
-
-    def map_update_option_functions(self):
-        res = {"checkbox": self.update_from_checkbox,
-               "spinbox": self.update_from_spinbox,
-               "combobox": self.update_from_combobox,
-               "slider": self.update_from_slider}
-        return res
-
-    def update(self, option, ui_element, opt_group, value):
-        self.update_option[ui_element](option, opt_group, value)
+    def update(self, option, opt_group, value, checkbox=False):
+        if checkbox:
+            value = (value == QtCore.Qt.CheckState.Checked)
+        self.options[opt_group][option] = value
         # emit signal to recompute image or spectrogram
         getattr(self, "update_" + opt_group).emit()
-
-    def update_from_checkbox(self, option, opt_group, value):
-        self.options[opt_group][option] = (
-            value == QtCore.Qt.CheckState.Checked)
-
-    def update_from_spinbox(self, option, opt_group, value):
-        self.options[opt_group][option] = value
-
-    def update_from_combobox(self, option, opt_group, value):
-        self.options[opt_group][option] = value
-
-    def update_from_slider(self, option, opt_group, value):
-        self.options[opt_group][option] = value
 
     def use_pcen(self, value):
         use_pcen = (value == QtCore.Qt.CheckState.Checked)
         self.cb_remove_noise.setEnabled(not use_pcen)
-        self.update("pcen", "checkbox",
-                    SoundPlayerSettings.GROUP_SPECTROGRAM, value)
+        self.update("pcen", SoundPlayerSettings.GROUP_SPECTROGRAM, use_pcen)
 
     def update_checkbox(self, checkbox, value):
         checkbox.setChecked(value)
