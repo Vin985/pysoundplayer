@@ -140,7 +140,6 @@ class QSpectrogramOptions(QtWidgets.QWidget, Ui_SpectrogramOptions):
     def update_from_checkbox(self, option, opt_group, value):
         self.options[opt_group][option] = (
             value == QtCore.Qt.CheckState.Checked)
-        print(self.options[opt_group])
 
     def update_from_spinbox(self, option, opt_group, value):
         self.options[opt_group][option] = value

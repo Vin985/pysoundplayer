@@ -38,7 +38,9 @@ class SpectrogramVizualizer(QMainWindow, Ui_SpectrogramVizualizer):
 
 def main():
     app = QApplication(sys.argv)
-    app.settings = SoundPlayerSettings()
+    app.setOrganizationName("ecosongs")
+    app.setOrganizationDomain("https://github.com/vin985/pysoundplayer")
+    app.setApplicationName("pysoundplayer")
     specviz = SpectrogramVizualizer()
     sys.exit(app.exec_())
 

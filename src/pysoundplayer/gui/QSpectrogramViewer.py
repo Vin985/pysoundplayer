@@ -83,7 +83,6 @@ class QSpectrogramViewer(QtWidgets.QWidget, Ui_SpectrogramViewer):
     def display_spectrogram(self):
         # TODO: save image somewhere
         im = self.image_generator.spec2img(self.spectrogram)
-        print(self.image_generator.options)
         # TODO: change events when checkbox is checked
         # if self.checkbox_draw_events.isChecked():
         #     im = self.draw_events(im, max_duration)
