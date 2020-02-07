@@ -82,7 +82,6 @@ class SoundPlayerSettings(QSettings):
     def spectrogram_settings(self, context=""):
         group = self.GROUP_SPECTROGRAM
         res = {}
-        # Spectrogram settings
         if context:
             context = "/" + context
         self.beginGroup(group + context)
@@ -93,36 +92,13 @@ class SoundPlayerSettings(QSettings):
             self.beginGroup(group)
         for key in self.childKeys():
             res[key] = self.get_spec_setting(key)
-        # res["window"] = self.get_spec_setting("window")
-        # res["n_fft"] = self.get_spec_setting("n_fft")
-        # res["pcen"] = self.get_spec_setting("pcen")
-        # res["to_db"] = self.get_spec_setting("to_db")
-        # res["normalize"] = self.get_spec_setting("normalize")
-        # res["hop_length"] = self.get_spec_setting("hop_length")
-        # res["scale"] = self.get_spec_setting("scale")
-        # res["remove_noise"] = self.get_spec_setting("remove_noise")
-        # res["nr_hist_rel_size"] = self.get_spec_setting("nr_hist_rel_size")
-        # res["nr_N"] = self.get_spec_setting("nr_N")
-        # res["nr_window_smoothing"] = self.get_spec_setting(
-        #     "nr_window_smoothing")
         self.endGroup()
         return res
-
-    # TODO: Automatize value loading based on childkeys
 
     def image_settings(self):
         res = {}
         self.beginGroup(self.GROUP_IMAGE)
-        # res["color_masks_str"] = self.get_image_setting(
-        #     "color_masks_str")
-        # res["contrast"] = self.get_image_setting("contrast")
-        # res["invert_colors"] = self.get_image_setting("invert_colors")
-        # res["composite_ffts"] = self.get_image_setting("composite_ffts")
-        # res["height"] = self.get_image_setting("height")
-        # res["pixels_in_sec"] = self.get_image_setting("pixels_in_sec")
-        # res["color_map"] = self.get_image_setting("color_map")
         for key in self.childKeys():
-                res[key] = self.get_image_setting(key)
-        # res["composite_ffts"] = [int(i) for i in composite_ffts]
+            res[key] = self.get_image_setting(key)
         self.endGroup()
         return res
