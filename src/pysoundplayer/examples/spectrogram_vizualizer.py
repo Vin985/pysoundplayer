@@ -24,15 +24,16 @@ class SpectrogramVizualizer(QMainWindow, Ui_SpectrogramVizualizer):
 
     def share_settings(self):
         self.spectrogram_viewer.settings = self.settings
-        self.spectrogram_options.settings = self.settings
+        self.spectrogram_options.options = self.settings.spectrogram_options
+        self.image_options.options = self.settings.image_options
 
     def link_events(self):
         self.sound_player.update_position.connect(
             self.spectrogram_viewer.update_sound_marker)
         self.spectrogram_viewer.seek.connect(self.sound_player.seek)
-        self.spectrogram_options.update_image.connect(
+        self.image_options.option_updated.connect(
             self.spectrogram_viewer.update_image)
-        self.spectrogram_options.update_spectrogram.connect(
+        self.spectrogram_options.option_updated.connect(
             self.spectrogram_viewer.update_spectrogram)
 
 

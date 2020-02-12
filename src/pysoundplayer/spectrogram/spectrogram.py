@@ -3,28 +3,40 @@ import numpy as np
 from ..common.options_object import OptionsObject
 
 
-class Spectrogram(OptionsObject):
-
+class SpectrogramOptions(OptionsObject):
     DEFAULT_OPTIONS = {"n_fft": 512, "to_db": True, "pcen": False,
                        "remove_noise": False, "normalize": False,
                        "hop_length": None, "window": 'hann', "scale": "Linear",
-                       "nr_hist_rel_size": 2, "nr_N": 0.1, "nr_window_smoothing": 5}
+                       "nr_hist_rel_size": 2, "nr_N": 0.1, "nr_window_smoothing": 5,
+                       "follow_sound": False}
     ACCEPTED_VALUES = {"n_fft": [str(2**x) for x in range(7, 12)],
                        "scale": ["Linear", "Mel"],
                        "window": ["hann", "hamming", "boxcar", "bartlett"]}
 
-    def __init__(self, audio, spec_options=None):
+    TYPE = "spectrogram"
+
+    def __init__(self, spec_options=None):
         super().__init__(options=spec_options)
+
+
+class Spectrogram():
+
+    def __init__(self, audio, spec_options=None):
+        self.options = spec_options
         self.audio = audio
         self.spec = self.create_spectrogram()
+
+    def __getitem__(self, key):
+        return self.options[key]
 
     @property
     def duration(self):
         return self.audio.duration
 
     def create_spectrogram(self):
-        hop_length = int(
-            self["hop_length"]) if self["hop_length"] is not None else self["hop_length"]
+        hop_length = self.options["hop_length"]
+        if hop_length is not None:
+            hop_length = int(hop_length)
         spectro = librosa.stft(
             self.audio.get_data(), int(self["n_fft"]), hop_length=hop_length, window=self["window"])
 
@@ -35,7 +47,7 @@ class Spectrogram(OptionsObject):
 
         if self["pcen"]:
             # TODO: test this!!!
-            return librosa.pcen(spec * (2**31))
+            return librosa.pcen(spec * (2**31), bias=1, power=0.25)
 
         if self["remove_noise"]:
             # TODO: check SNR to remove noise?
@@ -137,4 +149,4 @@ class Spectrogram(OptionsObject):
     def __str__(self):
         string = "Spectrogram with fft: {0}, shape {1} and value \n {2}".format(
             self["fft"], self.spec.shape, self.spec)
-        return (string)
+        return string

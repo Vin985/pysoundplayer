@@ -9,8 +9,7 @@ from PIL import Image, ImageEnhance, ImageOps
 from ..common.options_object import OptionsObject
 
 
-class ImageGenerator(OptionsObject):
-
+class ImageOptions(OptionsObject):
     DEFAULT_OPTIONS = {"color_masks_str": ['red', 'lime', 'blue'],
                        "composite_ffts": [128, 512, 2048],
                        "contrast": 0,
@@ -22,9 +21,20 @@ class ImageGenerator(OptionsObject):
     ACCEPTED_VALUES = {"color_map": [
         key for key in cc.cm.keys() if len(key.split("_")) == 1]}
 
+    TYPE = "image"
+
     def __init__(self, image_options=None):
         super().__init__(options=image_options)
+
+
+class ImageGenerator():
+
+    def __init__(self, image_options=None):
+        self.options = image_options
         self._color_masks = None
+
+    def __getitem__(self, key):
+        return self.options[key]
 
     @property
     def color_masks(self):
@@ -34,10 +44,10 @@ class ImageGenerator(OptionsObject):
         return self._color_masks
 
     def __get_color_rgb(self, color):
-        if type(color) is tuple:
-            return (color)
-        elif type(color) is str:
-            return (webcolors.name_to_rgb(color))
+        if isinstance(color, tuple):
+            return color
+        elif isinstance(color, str):
+            return webcolors.name_to_rgb(color)
 
     # Prepare spectrograms to generate image
     def __prepare_spectrogram(self, spec):
