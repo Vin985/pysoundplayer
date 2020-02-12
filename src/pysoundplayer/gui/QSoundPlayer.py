@@ -103,14 +103,18 @@ class QSoundPlayer(QtWidgets.QWidget, Ui_QSoundPlayer):
         self.update_position_ui()
         self.update_play_btn(self.TOOLTIP_PLAY, checked=False)
 
-    def seek(self, pos, update_position=True):
+    def seek(self, pos, from_slider=False):
         self.position = pos
         self.sound_player.seek(pos)
-        if update_position:
+        if from_slider:
+            # Seek has been done using the slider. Do not update the slider
+            self.update_position_ui(slider=False)
+        else:
+            # Update everything
             self.update_sound_position()
 
     def seek_slider(self, value):
-        self.seek(value * self.SLIDER_INTERVAL, update_position=False)
+        self.seek(value * self.SLIDER_INTERVAL, from_slider=True)
 
     def change_playback_speed(self, idx):
         speed = float(self.cb_playbackSpeed.itemText(idx))
@@ -137,9 +141,10 @@ class QSoundPlayer(QtWidgets.QWidget, Ui_QSoundPlayer):
                 self.btn_play.click()
         self.update_position_ui()
 
-    def update_position_ui(self):
+    def update_position_ui(self, slider=True):
         self.update_position_label()
-        self.update_slider()
+        if slider:
+            self.update_slider()
         self.update_position.emit(self.position)
 
     def update_slider(self):

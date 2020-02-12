@@ -3,11 +3,11 @@ from PySide2 import QtWidgets, QtCore, QtGui
 from PySide2.QtWidgets import (QGraphicsPixmapItem, QGraphicsScene,
                                QGraphicsTextItem)
 from ..spectrogram.image import ImageGenerator
-from .ui.QSpectrogramViewer_ui import Ui_SpectrogramViewer
+from .ui.QSpectrogramViewer_ui import Ui_QSpectrogramViewer
 from .event_filters import SpectrogramMouseFilter
 
 
-class QSpectrogramViewer(QtWidgets.QWidget, Ui_SpectrogramViewer):
+class QSpectrogramViewer(QtWidgets.QWidget, Ui_QSpectrogramViewer):
 
     seek = QtCore.Signal(float)
 
@@ -124,11 +124,12 @@ class QSpectrogramViewer(QtWidgets.QWidget, Ui_SpectrogramViewer):
 
         self.spectrogram_scene.update()
 
-        # if self.spectrogram_options.follow():
-        #     self.scrollingWithoutUser = True
-        #     self.scrollView.centerOn(markerPos, self.viewCenter.y())
-        #     self.scrollingWithoutUser = False
-        #     self.setZoomBoundingBox(updateCenter=False)
+        if self.spectrogram_options["follow_sound"]:
+            self.center_view()
+
+    def center_view(self):
+        self.spectrogram_view.centerOn(
+            self.marker_position, self.get_center().y())
 
     def zoom(self, scale, scene_pos=None):
         self.yscale *= scale
@@ -145,10 +146,15 @@ class QSpectrogramViewer(QtWidgets.QWidget, Ui_SpectrogramViewer):
     def seek_sound(self, pos):
         self.seek.emit(self.image_generator.pixels2sec(pos))
 
-    def update_spectrogram(self):
-        self.spectrogram = self.audio.get_spectrogram(
-            self.spectrogram_options, recreate=True)
+    def update_spectrogram(self, option, redraw):
+        if redraw:
+            self.spectrogram = self.audio.get_spectrogram(
+                self.spectrogram_options, recreate=True)
 
-    def update_image(self):
-        print("updating image")
-        self.display_spectrogram()
+    def update_image(self, option, redraw):
+        if redraw:
+            self.display_spectrogram()
+
+    def get_center(self):
+        return self.spectrogram_view.mapToScene(
+            self.spectrogram_view.viewport().rect().center())
