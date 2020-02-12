@@ -29,8 +29,6 @@ class Audio():
 
     def get_spectrogram(self, options, recreate=False):
         if not self._spec or recreate:
-            print("creating spectrogram")
-            print(options)
             self._spec = Spectrogram(self, options)
         return self._spec
 
