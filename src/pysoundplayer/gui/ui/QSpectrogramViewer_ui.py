@@ -1,33 +1,45 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'QSpectrogramViewer.ui',
-# licensing of 'QSpectrogramViewer.ui' applies.
-#
-# Created: Fri Jan 31 16:13:22 2020
-#      by: pyside2-uic  running on PySide2 5.12.2
-#
-# WARNING! All changes made in this file will be lost!
+################################################################################
+## Form generated from reading UI file 'QSpectrogramViewer.ui'
+##
+## Created by: Qt User Interface Compiler version 5.14.1
+##
+## WARNING! All changes made in this file will be lost when recompiling UI file!
+################################################################################
 
-from PySide2 import QtCore, QtGui, QtWidgets
+from PySide2.QtCore import (QCoreApplication, QMetaObject, QObject, QPoint,
+    QRect, QSize, QUrl, Qt)
+from PySide2.QtGui import (QBrush, QColor, QConicalGradient, QCursor, QFont,
+    QFontDatabase, QIcon, QLinearGradient, QPalette, QPainter, QPixmap,
+    QRadialGradient)
+from PySide2.QtWidgets import *
 
-class Ui_SpectrogramViewer(object):
-    def setupUi(self, SpectrogramViewer):
-        SpectrogramViewer.setObjectName("SpectrogramViewer")
-        SpectrogramViewer.resize(400, 300)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Preferred)
+
+class Ui_QSpectrogramViewer(object):
+    def setupUi(self, QSpectrogramViewer):
+        if QSpectrogramViewer.objectName():
+            QSpectrogramViewer.setObjectName(u"QSpectrogramViewer")
+        QSpectrogramViewer.resize(400, 300)
+        sizePolicy = QSizePolicy(QSizePolicy.Expanding, QSizePolicy.Preferred)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(SpectrogramViewer.sizePolicy().hasHeightForWidth())
-        SpectrogramViewer.setSizePolicy(sizePolicy)
-        self.horizontalLayout = QtWidgets.QHBoxLayout(SpectrogramViewer)
-        self.horizontalLayout.setObjectName("horizontalLayout")
-        self.spectrogram_view = QtWidgets.QGraphicsView(SpectrogramViewer)
-        self.spectrogram_view.setObjectName("spectrogram_view")
+        sizePolicy.setHeightForWidth(QSpectrogramViewer.sizePolicy().hasHeightForWidth())
+        QSpectrogramViewer.setSizePolicy(sizePolicy)
+        self.horizontalLayout = QHBoxLayout(QSpectrogramViewer)
+        self.horizontalLayout.setObjectName(u"horizontalLayout")
+        self.spectrogram_view = QGraphicsView(QSpectrogramViewer)
+        self.spectrogram_view.setObjectName(u"spectrogram_view")
+
         self.horizontalLayout.addWidget(self.spectrogram_view)
 
-        self.retranslateUi(SpectrogramViewer)
-        QtCore.QMetaObject.connectSlotsByName(SpectrogramViewer)
 
-    def retranslateUi(self, SpectrogramViewer):
-        SpectrogramViewer.setWindowTitle(QtWidgets.QApplication.translate("SpectrogramViewer", "Form", None, -1))
+        self.retranslateUi(QSpectrogramViewer)
+
+        QMetaObject.connectSlotsByName(QSpectrogramViewer)
+    # setupUi
+
+    def retranslateUi(self, QSpectrogramViewer):
+        QSpectrogramViewer.setWindowTitle(QCoreApplication.translate("QSpectrogramViewer", u"Form", None))
+    # retranslateUi
 

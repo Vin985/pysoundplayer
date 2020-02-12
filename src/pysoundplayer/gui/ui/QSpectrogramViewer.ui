@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>SpectrogramViewer</class>
- <widget class="QWidget" name="SpectrogramViewer">
+ <class>QSpectrogramViewer</class>
+ <widget class="QWidget" name="QSpectrogramViewer">
   <property name="geometry">
    <rect>
     <x>0</x>

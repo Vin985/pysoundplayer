@@ -83,8 +83,7 @@
        <property name="icon">
         <iconset resource="qsoundplayer.qrc">
          <normaloff>:/icons/play</normaloff>
-         <activeoff>:/icons/play</activeoff>
-         <activeon>:/icons/pause</activeon>:/icons/play</iconset>
+         <normalon>:/icons/pause</normalon>:/icons/play</iconset>
        </property>
        <property name="iconSize">
         <size>
@@ -166,7 +165,7 @@
   <customwidget>
    <class>QJumpSlider</class>
    <extends>QSlider</extends>
-   <header>pysoundplayer/gui/QJumpSlider.h</header>
+   <header>pysoundplayer.gui.QJumpSlider.h</header>
   </customwidget>
  </customwidgets>
  <resources>

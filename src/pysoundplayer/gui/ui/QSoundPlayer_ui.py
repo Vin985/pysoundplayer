@@ -1,116 +1,125 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'QSoundPlayer.ui',
-# licensing of 'QSoundPlayer.ui' applies.
-#
-# Created: Thu Jan 30 11:23:49 2020
-#      by: pyside2-uic  running on PySide2 5.12.2
-#
-# WARNING! All changes made in this file will be lost!
+################################################################################
+## Form generated from reading UI file 'QSoundPlayer.ui'
+##
+## Created by: Qt User Interface Compiler version 5.14.1
+##
+## WARNING! All changes made in this file will be lost when recompiling UI file!
+################################################################################
+
+from PySide2.QtCore import (QCoreApplication, QMetaObject, QObject, QPoint,
+    QRect, QSize, QUrl, Qt)
+from PySide2.QtGui import (QBrush, QColor, QConicalGradient, QCursor, QFont,
+    QFontDatabase, QIcon, QLinearGradient, QPalette, QPainter, QPixmap,
+    QRadialGradient)
+from PySide2.QtWidgets import *
 
 from pysoundplayer.gui.QJumpSlider import QJumpSlider
-from . import qsoundplayer_rc
-from PySide2 import QtCore, QtGui, QtWidgets
 
+from  . import qsoundplayer_rc
 
 class Ui_QSoundPlayer(object):
     def setupUi(self, QSoundPlayer):
-        QSoundPlayer.setObjectName("QSoundPlayer")
+        if QSoundPlayer.objectName():
+            QSoundPlayer.setObjectName(u"QSoundPlayer")
         QSoundPlayer.resize(870, 77)
-        self.verticalLayout = QtWidgets.QVBoxLayout(QSoundPlayer)
-        self.verticalLayout.setObjectName("verticalLayout")
-        self.horizontalLayout = QtWidgets.QHBoxLayout()
-        self.horizontalLayout.setObjectName("horizontalLayout")
+        self.verticalLayout = QVBoxLayout(QSoundPlayer)
+        self.verticalLayout.setObjectName(u"verticalLayout")
+        self.horizontalLayout = QHBoxLayout()
+        self.horizontalLayout.setObjectName(u"horizontalLayout")
         self.slider_time = QJumpSlider(QSoundPlayer)
-        self.slider_time.setOrientation(QtCore.Qt.Horizontal)
-        self.slider_time.setObjectName("slider_time")
+        self.slider_time.setObjectName(u"slider_time")
+        self.slider_time.setOrientation(Qt.Horizontal)
+
         self.horizontalLayout.addWidget(self.slider_time)
-        self.lbl_pos = QtWidgets.QLabel(QSoundPlayer)
-        self.lbl_pos.setText("")
-        self.lbl_pos.setObjectName("lbl_pos")
+
+        self.lbl_pos = QLabel(QSoundPlayer)
+        self.lbl_pos.setObjectName(u"lbl_pos")
+
         self.horizontalLayout.addWidget(self.lbl_pos)
+
+
         self.verticalLayout.addLayout(self.horizontalLayout)
-        self.horizontalLayout_11 = QtWidgets.QHBoxLayout()
+
+        self.horizontalLayout_11 = QHBoxLayout()
         self.horizontalLayout_11.setSpacing(0)
-        self.horizontalLayout_11.setObjectName("horizontalLayout_11")
-        self.btn_stop = QtWidgets.QPushButton(QSoundPlayer)
-        sizePolicy = QtWidgets.QSizePolicy(
-            QtWidgets.QSizePolicy.Maximum, QtWidgets.QSizePolicy.Fixed)
+        self.horizontalLayout_11.setObjectName(u"horizontalLayout_11")
+        self.btn_stop = QPushButton(QSoundPlayer)
+        self.btn_stop.setObjectName(u"btn_stop")
+        sizePolicy = QSizePolicy(QSizePolicy.Maximum, QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(
-            self.btn_stop.sizePolicy().hasHeightForWidth())
+        sizePolicy.setHeightForWidth(self.btn_stop.sizePolicy().hasHeightForWidth())
         self.btn_stop.setSizePolicy(sizePolicy)
-        self.btn_stop.setText("")
-        icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap(":/icons/stop"),
-                       QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon = QIcon()
+        icon.addFile(u":/icons/stop", QSize(), QIcon.Normal, QIcon.Off)
         self.btn_stop.setIcon(icon)
-        self.btn_stop.setIconSize(QtCore.QSize(20, 20))
+        self.btn_stop.setIconSize(QSize(20, 20))
         self.btn_stop.setFlat(True)
-        self.btn_stop.setObjectName("btn_stop")
+
         self.horizontalLayout_11.addWidget(self.btn_stop)
-        self.btn_play = QtWidgets.QPushButton(QSoundPlayer)
-        sizePolicy = QtWidgets.QSizePolicy(
-            QtWidgets.QSizePolicy.Maximum, QtWidgets.QSizePolicy.Preferred)
-        sizePolicy.setHorizontalStretch(0)
-        sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(
-            self.btn_play.sizePolicy().hasHeightForWidth())
-        self.btn_play.setSizePolicy(sizePolicy)
-        self.btn_play.setText("")
-        icon1 = QtGui.QIcon()
-        icon1.addPixmap(QtGui.QPixmap(":/icons/play"),
-                        QtGui.QIcon.Normal, QtGui.QIcon.Off)
-        icon1.addPixmap(QtGui.QPixmap(":/icons/play"),
-                        QtGui.QIcon.Active, QtGui.QIcon.Off)
-        icon1.addPixmap(QtGui.QPixmap(":/icons/pause"),
-                        QtGui.QIcon.Active, QtGui.QIcon.On)
+
+        self.btn_play = QPushButton(QSoundPlayer)
+        self.btn_play.setObjectName(u"btn_play")
+        sizePolicy1 = QSizePolicy(QSizePolicy.Maximum, QSizePolicy.Preferred)
+        sizePolicy1.setHorizontalStretch(0)
+        sizePolicy1.setVerticalStretch(0)
+        sizePolicy1.setHeightForWidth(self.btn_play.sizePolicy().hasHeightForWidth())
+        self.btn_play.setSizePolicy(sizePolicy1)
+        icon1 = QIcon()
+        icon1.addFile(u":/icons/play", QSize(), QIcon.Normal, QIcon.Off)
+        icon1.addFile(u":/icons/pause", QSize(), QIcon.Normal, QIcon.On)
         self.btn_play.setIcon(icon1)
-        self.btn_play.setIconSize(QtCore.QSize(20, 20))
+        self.btn_play.setIconSize(QSize(20, 20))
         self.btn_play.setCheckable(True)
         self.btn_play.setFlat(True)
-        self.btn_play.setObjectName("btn_play")
+
         self.horizontalLayout_11.addWidget(self.btn_play)
-        spacerItem = QtWidgets.QSpacerItem(
-            40, 20, QtWidgets.QSizePolicy.Maximum, QtWidgets.QSizePolicy.Minimum)
-        self.horizontalLayout_11.addItem(spacerItem)
-        self.label = QtWidgets.QLabel(QSoundPlayer)
-        sizePolicy = QtWidgets.QSizePolicy(
-            QtWidgets.QSizePolicy.Maximum, QtWidgets.QSizePolicy.Preferred)
-        sizePolicy.setHorizontalStretch(0)
-        sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(
-            self.label.sizePolicy().hasHeightForWidth())
-        self.label.setSizePolicy(sizePolicy)
-        self.label.setAlignment(QtCore.Qt.AlignLeading |
-                                QtCore.Qt.AlignLeft | QtCore.Qt.AlignVCenter)
-        self.label.setObjectName("label")
+
+        self.horizontalSpacer_4 = QSpacerItem(40, 20, QSizePolicy.Maximum, QSizePolicy.Minimum)
+
+        self.horizontalLayout_11.addItem(self.horizontalSpacer_4)
+
+        self.label = QLabel(QSoundPlayer)
+        self.label.setObjectName(u"label")
+        sizePolicy1.setHeightForWidth(self.label.sizePolicy().hasHeightForWidth())
+        self.label.setSizePolicy(sizePolicy1)
+        self.label.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignVCenter)
+
         self.horizontalLayout_11.addWidget(self.label)
-        self.cb_playbackSpeed = QtWidgets.QComboBox(QSoundPlayer)
-        sizePolicy = QtWidgets.QSizePolicy(
-            QtWidgets.QSizePolicy.Maximum, QtWidgets.QSizePolicy.Fixed)
-        sizePolicy.setHorizontalStretch(0)
-        sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(
-            self.cb_playbackSpeed.sizePolicy().hasHeightForWidth())
+
+        self.cb_playbackSpeed = QComboBox(QSoundPlayer)
+        self.cb_playbackSpeed.setObjectName(u"cb_playbackSpeed")
+        sizePolicy.setHeightForWidth(self.cb_playbackSpeed.sizePolicy().hasHeightForWidth())
         self.cb_playbackSpeed.setSizePolicy(sizePolicy)
-        self.cb_playbackSpeed.setObjectName("cb_playbackSpeed")
+
         self.horizontalLayout_11.addWidget(self.cb_playbackSpeed)
-        spacerItem1 = QtWidgets.QSpacerItem(
-            40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
-        self.horizontalLayout_11.addItem(spacerItem1)
+
+        self.horizontalSpacer_3 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+
+        self.horizontalLayout_11.addItem(self.horizontalSpacer_3)
+
+
         self.verticalLayout.addLayout(self.horizontalLayout_11)
 
+
         self.retranslateUi(QSoundPlayer)
-        QtCore.QMetaObject.connectSlotsByName(QSoundPlayer)
+
+        QMetaObject.connectSlotsByName(QSoundPlayer)
+    # setupUi
 
     def retranslateUi(self, QSoundPlayer):
-        QSoundPlayer.setWindowTitle(
-            QtWidgets.QApplication.translate("QSoundPlayer", "Form", None, -1))
-        self.btn_stop.setToolTip(QtWidgets.QApplication.translate(
-            "QSoundPlayer", "Stop", None, -1))
-        self.btn_play.setToolTip(QtWidgets.QApplication.translate(
-            "QSoundPlayer", "Play", None, -1))
-        self.label.setText(QtWidgets.QApplication.translate(
-            "QSoundPlayer", "playback speed:", None, -1))
+        QSoundPlayer.setWindowTitle(QCoreApplication.translate("QSoundPlayer", u"Form", None))
+        self.lbl_pos.setText("")
+#if QT_CONFIG(tooltip)
+        self.btn_stop.setToolTip(QCoreApplication.translate("QSoundPlayer", u"Stop", None))
+#endif // QT_CONFIG(tooltip)
+        self.btn_stop.setText("")
+#if QT_CONFIG(tooltip)
+        self.btn_play.setToolTip(QCoreApplication.translate("QSoundPlayer", u"Play", None))
+#endif // QT_CONFIG(tooltip)
+        self.btn_play.setText("")
+        self.label.setText(QCoreApplication.translate("QSoundPlayer", u"playback speed:", None))
+    # retranslateUi
+
