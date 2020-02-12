@@ -15,13 +15,16 @@ src/pysoundplayer/examples/__init__.py
 src/pysoundplayer/examples/spectrogram_vizualizer.py
 src/pysoundplayer/examples/spectrogram_vizualizer_ui.py
 src/pysoundplayer/examples/test_soundplayer.py
+src/pysoundplayer/gui/QImageOptions.py
 src/pysoundplayer/gui/QJumpSlider.py
+src/pysoundplayer/gui/QOptionsWidget.py
 src/pysoundplayer/gui/QSoundPlayer.py
 src/pysoundplayer/gui/QSpectrogramOptions.py
 src/pysoundplayer/gui/QSpectrogramViewer.py
 src/pysoundplayer/gui/__init__.py
 src/pysoundplayer/gui/event_filters.py
 src/pysoundplayer/gui/settings.py
+src/pysoundplayer/gui/ui/QImageOptions_ui.py
 src/pysoundplayer/gui/ui/QSoundPlayer_ui.py
 src/pysoundplayer/gui/ui/QSpectrogramOptions_ui.py
 src/pysoundplayer/gui/ui/QSpectrogramViewer_ui.py

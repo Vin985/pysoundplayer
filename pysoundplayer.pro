@@ -34,12 +34,13 @@ FORMS += \
         mainwindow.ui \
     gui/QSoundPlayer.ui \
     src/pysoundplayer/gui/QSoundPlayer.ui \
-    src/pysoundplayer/gui/ui/QSoundPlayer.ui \
     examples/spectrogram_vizualizer.ui \
     src/pysoundplayer/examples/spectrogram_vizualizer2.ui \
     src/pysoundplayer/examples/spectrogram_vizualizer.ui \
-    src/pysoundplayer/gui/ui/QSpectrogramViewer.ui \
-    src/pysoundplayer/gui/ui/QSpectrogramOptions.ui
+    src/pysoundplayer/gui/ui/QImageOptions.ui \
+    src/pysoundplayer/gui/ui/QSoundPlayer.ui \
+    src/pysoundplayer/gui/ui/QSpectrogramOptions.ui \
+    src/pysoundplayer/gui/ui/QSpectrogramViewer.ui
 
 RESOURCES += \
     gui/qsoundplayer.qrc \
