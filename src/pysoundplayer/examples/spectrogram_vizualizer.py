@@ -12,29 +12,9 @@ class SpectrogramVizualizer(QMainWindow, Ui_SpectrogramVizualizer):
         # Usual setup stuff. Set up the user interface from Designer
         self.setupUi(self)
 
-        self.settings = SoundPlayerSettings()
-        self.share_settings()
-
-        audio = self.sound_player.load_file(
-            file_path="/mnt/win/UMoncton/OneDrive - Université de Moncton/Data/Reference/Priority/132133_SESA.wav")
-        self.spectrogram_viewer.audio = audio
-
-        self.link_events()
+        self.spectrogram_vizualizer.load_file(
+            "/mnt/win/UMoncton/OneDrive - Université de Moncton/Data/Reference/Priority/132133_SESA.wav")
         self.show()
-
-    def share_settings(self):
-        self.spectrogram_viewer.settings = self.settings
-        self.spectrogram_options.options = self.settings.spectrogram_options
-        self.image_options.options = self.settings.image_options
-
-    def link_events(self):
-        self.sound_player.update_position.connect(
-            self.spectrogram_viewer.update_sound_marker)
-        self.spectrogram_viewer.seek.connect(self.sound_player.seek)
-        self.image_options.option_updated.connect(
-            self.spectrogram_viewer.update_image)
-        self.spectrogram_options.option_updated.connect(
-            self.spectrogram_viewer.update_spectrogram)
 
 
 def main():
