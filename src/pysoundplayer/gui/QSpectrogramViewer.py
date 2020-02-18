@@ -158,3 +158,26 @@ class QSpectrogramViewer(QtWidgets.QWidget, Ui_QSpectrogramViewer):
     def get_center(self):
         return self.spectrogram_view.mapToScene(
             self.spectrogram_view.viewport().rect().center())
+
+    def clear_rects(self):
+        items = self.spectrogram_scene.items()
+        for item in items:
+            if isinstance(item, QtWidgets.QGraphicsRectItem):
+                self.spectrogram_scene.removeItem(item)
+
+    def draw_rect(self, start, end, y=0, height=-1, color="#ffffff", fill="", buffer=1):
+        x = self.image_generator.sec2pixels(start)
+        width = self.image_generator.sec2pixels(end - start)
+        if height == -1:
+            height = self.spectrogram_scene.height() - 2
+        rect = QtWidgets.QGraphicsRectItem()
+        rect.setPen(QtGui.QPen(color))
+        if fill is not None:
+            if not fill:
+                fill = color
+            rect.setBrush(QtGui.QBrush(fill, QtCore.Qt.SolidPattern))
+        if buffer:
+            y += buffer * height / 100
+            height -= buffer * height / 100
+        rect.setRect(x, y, width, height)
+        self.spectrogram_scene.addItem(rect)
