@@ -21,6 +21,7 @@ src/pysoundplayer/gui/QOptionsWidget.py
 src/pysoundplayer/gui/QSoundPlayer.py
 src/pysoundplayer/gui/QSpectrogramOptions.py
 src/pysoundplayer/gui/QSpectrogramViewer.py
+src/pysoundplayer/gui/QSpectrogramVizualizer.py
 src/pysoundplayer/gui/__init__.py
 src/pysoundplayer/gui/event_filters.py
 src/pysoundplayer/gui/settings.py
@@ -28,6 +29,7 @@ src/pysoundplayer/gui/ui/QImageOptions_ui.py
 src/pysoundplayer/gui/ui/QSoundPlayer_ui.py
 src/pysoundplayer/gui/ui/QSpectrogramOptions_ui.py
 src/pysoundplayer/gui/ui/QSpectrogramViewer_ui.py
+src/pysoundplayer/gui/ui/QSpectrogramVizualizer_ui.py
 src/pysoundplayer/gui/ui/__init__.py
 src/pysoundplayer/gui/ui/qsoundplayer_rc.py
 src/pysoundplayer/spectrogram/__init__.py

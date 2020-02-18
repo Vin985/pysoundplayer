@@ -40,7 +40,9 @@ FORMS += \
     src/pysoundplayer/gui/ui/QImageOptions.ui \
     src/pysoundplayer/gui/ui/QSoundPlayer.ui \
     src/pysoundplayer/gui/ui/QSpectrogramOptions.ui \
-    src/pysoundplayer/gui/ui/QSpectrogramViewer.ui
+    src/pysoundplayer/gui/ui/QSpectrogramViewer.ui \
+    src/pysoundplayer/examples/QSpectrogramVizualizer.ui \
+    src/pysoundplayer/gui/ui/QSpectrogramVizualizer.ui
 
 RESOURCES += \
     gui/qsoundplayer.qrc \
