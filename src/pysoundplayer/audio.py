@@ -1,4 +1,5 @@
 import librosa
+import soundfile
 from .spectrogram.spectrogram import Spectrogram
 
 
@@ -14,15 +15,20 @@ class Audio():
         self._spec = None
 
     def __getitem__(self, index):
-        return self.data.__getitem__(index)
-
-    def get_frames(self, pos, nframes):
-        end_idx = pos + nframes
-        data = []
         if self.nchannels == 1:
-            data = self.data[pos:end_idx]
+            data = self.data[index]
         else:
-            data = self.data[:, pos:end_idx]
+            data = self.data[:, index]
+        return data
+
+    def get_frames(self, start, end=None, nframes=None):
+        if not end and not nframes:
+            raise AttributeError(
+                "Either the attribute 'end' with the position of ending frame or 'nframes' with the number of frames desired is required")
+        end_idx = end or start + nframes
+        data = []
+        data = self[start:end_idx]
+        if self.nchannels > 1:
             data = data.T.reshape((1, -1))
         done = (end_idx >= self.nframes)
         return (data, end_idx, done)
@@ -36,3 +42,42 @@ class Audio():
         if mono and self.nchannels == 2:
             return librosa.to_mono(self.data)
         return self.data
+
+    def frames_to_seconds(self, frames):
+        return frames / self.sr / self.nchannels
+
+    def get_silences(self, *args,  min_dur=1, **kwargs):
+        res = []
+        if self.data is not None and self.data.size:
+            sound_intervals = librosa.effects.split(self.data, *args, **kwargs)
+            start = 0
+            end = 0
+            for interval in sound_intervals:
+                if (interval[1] - interval[0]) < (min_dur * self.sr * self.nchannels):
+                    continue
+                end = interval[0]
+                if end > start:
+                    res.append((start, end))
+                start = interval[1]
+
+            # Special case where the file ends with a silence
+            if start < self.nframes:
+                end = self.nframes
+                res.append((start, end))
+
+        return res
+
+    def write(self, file_path, start=None, end=None):
+        if start is None and end is None:
+            data = self.data
+        else:
+            if start is not None and end is not None:
+                data = self[start:end]
+            else:
+                raise AttributeError(
+                    "Both start and end arguments should be provided")
+
+        if self.nchannels > 1:
+            data = data.T
+
+        soundfile.write(file_path, data, samplerate=self.sr)
