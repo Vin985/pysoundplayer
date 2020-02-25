@@ -21,3 +21,8 @@ class OptionsObject():
 
     def __str__(self):
         return str(self.__class__) + " with values: " + str(self._options)
+
+    def add_missing_options(self):
+        for key, value in self.DEFAULT_OPTIONS.items():
+            if key not in self._options:
+                self._options[key] = value

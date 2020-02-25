@@ -91,6 +91,7 @@ class SoundPlayerSettings(QSettings):
         for key in self.childKeys():
             res[key] = self.get(key, res.DEFAULT_OPTIONS[key])
         self.endGroup()
+        res.add_missing_options()
         return res
 
     def image_settings(self):
@@ -99,4 +100,5 @@ class SoundPlayerSettings(QSettings):
         for key in self.childKeys():
             res[key] = self.get(key, res.DEFAULT_OPTIONS[key])
         self.endGroup()
+        res.add_missing_options()
         return res
