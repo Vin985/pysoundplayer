@@ -44,9 +44,9 @@ class Audio():
         return self.data
 
     def frames_to_seconds(self, frames):
-        return frames / self.sr / self.nchannels
+        return frames / self.sr
 
-    def get_silences(self, *args,  min_dur=1, **kwargs):
+    def get_silences(self, *args, min_dur=1, **kwargs):
         res = []
         if self.data is not None and self.data.size:
             sound_intervals = librosa.effects.split(self.data, *args, **kwargs)
@@ -65,6 +65,45 @@ class Audio():
                 end = self.nframes
                 res.append((start, end))
 
+        return res
+
+    def get_sound_intervals(self, *args, min_sound_duration=1, min_silence_duration=1, **kwargs):
+        res = []
+        if self.data is not None and self.data.size:
+            sound_intervals = librosa.effects.split(self.data, *args, **kwargs)
+            start = 0
+            end = 0
+            last_silence_start = 0
+            last_silence_end = 0
+            last_sound = []
+            for interval in sound_intervals:
+
+                last_silence_end = interval[0]
+
+                duration = self.frames_to_seconds(interval[1] - interval[0])
+                # if the sounds lasts less than minimum duration, consider it a silence
+                if duration < min_sound_duration:
+                    last_silence_end = interval[1]
+                    continue
+
+                # File starts with a silence
+                if start == 0 and interval[0] > 0:
+                    # Keep the silence if it lasts less than minimum duration
+                    if self.frames_to_seconds(interval[0]) > min_silence_duration:
+                        start = interval[0]
+                else:
+                    start = interval[0]
+
+                # The last silence was shorter than the minimum duration: keep it as sound
+                if last_silence_end > 0 and (last_silence_end - last_silence_start) < min_silence_duration:
+                    last_sound[1] = interval[1]
+                    last_silence_start = interval[1]
+                    continue
+
+                end = interval[1]
+                last_silence_start = interval[1]
+                last_sound = [start, end]
+                res.append(last_sound)
         return res
 
     def write(self, file_path, start=None, end=None):
