@@ -10,6 +10,7 @@ from .event_filters import SpectrogramMouseFilter
 class QSpectrogramViewer(QtWidgets.QWidget, Ui_QSpectrogramViewer):
 
     seek = QtCore.Signal(float)
+    spectrogram_drawn = QtCore.Signal()
 
     def __init__(self, parent=None, audio=None, settings=None):
         super().__init__(parent)
@@ -99,6 +100,7 @@ class QSpectrogramViewer(QtWidgets.QWidget, Ui_QSpectrogramViewer):
         self.sound_marker = None
         if self.marker_position:
             self.update_sound_marker(None)
+        self.spectrogram_drawn.emit()
 
     def display_text(self, text):
         text_item = QGraphicsTextItem()
