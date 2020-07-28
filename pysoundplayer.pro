@@ -31,20 +31,7 @@ HEADERS += \
         mainwindow.h
 
 FORMS += \
-        mainwindow.ui \
-    gui/QSoundPlayer.ui \
-    src/pysoundplayer/gui/QSoundPlayer.ui \
-    examples/spectrogram_vizualizer.ui \
-    src/pysoundplayer/examples/spectrogram_vizualizer2.ui \
-    src/pysoundplayer/examples/spectrogram_vizualizer.ui \
-    src/pysoundplayer/gui/ui/QImageOptions.ui \
-    src/pysoundplayer/gui/ui/QSoundPlayer.ui \
-    src/pysoundplayer/gui/ui/QSpectrogramOptions.ui \
-    src/pysoundplayer/gui/ui/QSpectrogramViewer.ui \
-    src/pysoundplayer/examples/QSpectrogramVizualizer.ui \
-    src/pysoundplayer/gui/ui/QSpectrogramVizualizer.ui
+    src/pysoundplayer/widget/ui/sound_player.ui
 
 RESOURCES += \
-    gui/qsoundplayer.qrc \
-    src/pysoundplayer/gui/qsoundplayer.qrc \
-    src/pysoundplayer/gui/ui/qsoundplayer.qrc
+    src/pysoundplayer/widget/ui/sound_player.qrc

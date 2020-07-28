@@ -1,13 +1,13 @@
 import librosa
 import soundfile
-from .spectrogram.spectrogram import Spectrogram
+
+# from .spectrogram.spectrogram import Spectrogram
 
 
-class Audio():
+class Audio:
     def __init__(self, file_path, sr=None, mono=False, **kwargs):
         self.file_path = file_path
-        (self.data, self.sr) = (librosa.load(
-            file_path, sr=sr, mono=mono, **kwargs))
+        (self.data, self.sr) = librosa.load(file_path, sr=sr, mono=mono, **kwargs)
         self.nchannels = len(self.data.shape)
         self.nframes = self.data.shape[self.nchannels - 1]
         self.duration = self.nframes / self.sr
@@ -24,19 +24,20 @@ class Audio():
     def get_frames(self, start, end=None, nframes=None):
         if not end and not nframes:
             raise AttributeError(
-                "Either the attribute 'end' with the position of ending frame or 'nframes' with the number of frames desired is required")
+                "Either the attribute 'end' with the position of ending frame or 'nframes' with the number of frames desired is required"
+            )
         end_idx = end or start + nframes
         data = []
         data = self[start:end_idx]
         if self.nchannels > 1:
             data = data.T.reshape((1, -1))
-        done = (end_idx >= self.nframes)
+        done = end_idx >= self.nframes
         return (data, end_idx, done)
 
-    def get_spectrogram(self, options, recreate=False):
-        if not self._spec or recreate:
-            self._spec = Spectrogram(self, options)
-        return self._spec
+    # def get_spectrogram(self, options, recreate=False):
+    #     if not self._spec or recreate:
+    #         self._spec = Spectrogram(self, options)
+    #     return self._spec
 
     def get_data(self, mono=True):
         if mono and self.nchannels == 2:
@@ -67,7 +68,9 @@ class Audio():
 
         return res
 
-    def get_sound_intervals(self, *args, min_sound_duration=1, min_silence_duration=1, **kwargs):
+    def get_sound_intervals(
+        self, *args, min_sound_duration=1, min_silence_duration=1, **kwargs
+    ):
         res = []
         if self.data is not None and self.data.size:
             sound_intervals = librosa.effects.split(self.data, *args, **kwargs)
@@ -95,7 +98,10 @@ class Audio():
                     start = interval[0]
 
                 # The last silence was shorter than the minimum duration: keep it as sound
-                if last_silence_end > 0 and (last_silence_end - last_silence_start) < min_silence_duration:
+                if (
+                    last_silence_end > 0
+                    and (last_silence_end - last_silence_start) < min_silence_duration
+                ):
                     last_sound[1] = interval[1]
                     last_silence_start = interval[1]
                     continue
@@ -113,8 +119,7 @@ class Audio():
             if start is not None and end is not None:
                 data = self[start:end]
             else:
-                raise AttributeError(
-                    "Both start and end arguments should be provided")
+                raise AttributeError("Both start and end arguments should be provided")
 
         if self.nchannels > 1:
             data = data.T

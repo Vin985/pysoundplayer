@@ -1,6 +1,6 @@
 PySoundPlayer
 ============
 
-A simple program to play audio with a Qt Widget to display it
+A simple python library to play audio with a qt widget to display it
 
 

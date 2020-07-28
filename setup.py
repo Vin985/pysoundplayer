@@ -9,13 +9,11 @@ def read(fname):
 
 setup(
     author="Vin985",
-    description=("A simple sound player with a Qt widget to display it"),
+    description=("A simple library to play sounds"),
     keywords="audio",
     # long_description=read('README.md'),
     name="pysoundplayer",
-    version="0.1",
+    version="0.2",
     packages=find_packages(),
-    package_data={
-        '': ['*.svg', '*.yaml', '*.zip', '*.ico', '*.bat']
-    }
+    package_data={"": ["*.svg", "*.yaml", "*.zip", "*.ico", "*.bat"]},
 )

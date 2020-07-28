@@ -6,7 +6,7 @@
         {
             "label": "pysoundplayer all",
             "type": "shell",
-            "command": "python setup.py clean --all; python setup.py install; cd src/pysoundplayer/examples; python spectrogram_vizualizer.py",
+            "command": "python setup.py clean --all; python setup.py install; cd examples; python example_play.py",
             "group": {
                 "kind": "build",
                 "isDefault": true

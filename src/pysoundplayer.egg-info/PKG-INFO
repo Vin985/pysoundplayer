@@ -1,7 +1,7 @@
 Metadata-Version: 1.0
 Name: pysoundplayer
-Version: 0.1
-Summary: A simple sound player with a Qt widget to display it
+Version: 0.2
+Summary: A simple library to play sounds
 Home-page: UNKNOWN
 Author: Vin985
 Author-email: UNKNOWN

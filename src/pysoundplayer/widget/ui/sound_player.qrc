@@ -1,0 +1,7 @@
+<RCC>
+    <qresource prefix="/icons">
+        <file alias="play">icons/fa-play.svg</file>
+        <file alias="pause">icons/fa-pause.svg</file>
+        <file alias="stop">icons/fa-stop.svg</file>
+    </qresource>
+</RCC>
