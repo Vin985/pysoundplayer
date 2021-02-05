@@ -47,6 +47,9 @@ class Audio:
     def frames_to_seconds(self, frames):
         return frames / self.sr
 
+    def seconds_to_frames(self, seconds):
+        return round(seconds * self.sr)
+
     def get_silences(self, *args, min_dur=1, **kwargs):
         res = []
         if self.data is not None and self.data.size:
@@ -112,16 +115,29 @@ class Audio:
                 res.append(last_sound)
         return res
 
-    def write(self, file_path, start=None, end=None):
-        if start is None and end is None:
-            data = self.data
-        else:
-            if start is not None and end is not None:
-                data = self[start:end]
+    def write(self, file_path, data=None, sr=None, start=None, end=None):
+        if data is None:
+            sr = self.sr
+            if start is None and end is None:
+                data = self.data
             else:
-                raise AttributeError("Both start and end arguments should be provided")
+                if start is not None and end is not None:
+                    data = self[start:end]
+                else:
+                    raise AttributeError(
+                        "Both start and end arguments should be provided"
+                        + "at the same time"
+                    )
+            if self.nchannels > 1:
+                data = data.T
 
+        soundfile.write(file_path, data, samplerate=sr)
+
+    def get_extract(self, start, end, seconds=False):
+        if seconds:
+            start = self.seconds_to_frames(start)
+            end = self.seconds_to_frames(end)
+        extract = self[start:end]
         if self.nchannels > 1:
-            data = data.T
-
-        soundfile.write(file_path, data, samplerate=self.sr)
+            extract = extract.T
+        return extract
