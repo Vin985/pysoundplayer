@@ -22,6 +22,16 @@
                 "isDefault": true
             },
             "problemMatcher": []
+        },
+        {
+            "label": "pysoundplayer develop",
+            "type": "shell",
+            "command": "python setup.py clean --all; python setup.py develop",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "problemMatcher": []
         }
     ]
 }

@@ -52,7 +52,7 @@
         <string/>
        </property>
        <property name="icon">
-        <iconset resource="../resources/sound_player.qrc">
+        <iconset resource="sound_player.qrc">
          <normaloff>:/icons/stop</normaloff>:/icons/stop</iconset>
        </property>
        <property name="iconSize">
@@ -81,7 +81,7 @@
         <string/>
        </property>
        <property name="icon">
-        <iconset resource="../resources/sound_player.qrc">
+        <iconset resource="sound_player.qrc">
          <normaloff>:/icons/play</normaloff>
          <normalon>:/icons/pause</normalon>:/icons/play</iconset>
        </property>
@@ -169,7 +169,7 @@
   </customwidget>
  </customwidgets>
  <resources>
-  <include location="../resources/sound_player.qrc"/>
+  <include location="sound_player.qrc"/>
  </resources>
  <connections/>
 </ui>

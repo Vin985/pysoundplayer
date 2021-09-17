@@ -2,7 +2,7 @@ import pyaudio
 from .audio import Audio
 
 
-class SoundPlayer():
+class SoundPlayer:
     def __init__(self):
         # init pyaudio
         self.pa = pyaudio.PyAudio()
@@ -17,12 +17,14 @@ class SoundPlayer():
         self.terminate()
 
     def open_stream(self):
-        self.stream = self.pa.open(format=self.pa.get_format_from_width(self.audio.sample_width),
-                                   channels=self.audio.nchannels,
-                                   rate=int(self.audio.sr * self.speed),
-                                   output=True,
-                                   start=False,
-                                   stream_callback=self.read_frames)
+        self.stream = self.pa.open(
+            format=self.pa.get_format_from_width(self.audio.sample_width),
+            channels=self.audio.nchannels,
+            rate=int(self.audio.sr * self.speed),
+            output=True,
+            start=False,
+            stream_callback=self.read_frames,
+        )
 
     def load(self, file_path):
         print("librosa loading: " + file_path)
@@ -45,8 +47,7 @@ class SoundPlayer():
         self.stream.start_stream()
 
     def read_frames(self, input_data, frame_count, time_info, status):
-        (data, new_pos, done) = self.audio.get_frames(
-            self.pos, nframes=frame_count)
+        (data, new_pos, done) = self.audio.get_frames(self.pos, nframes=frame_count)
         # expected_size = self.audio.sample_width * frame_count * self.audio.nchannels
         # end_idx = self.pos + frame_count
         # data = []

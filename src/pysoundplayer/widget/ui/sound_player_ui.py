@@ -3,21 +3,19 @@
 ################################################################################
 ## Form generated from reading UI file 'sound_player.ui'
 ##
-## Created by: Qt User Interface Compiler version 5.15.0
+## Created by: Qt User Interface Compiler version 6.1.2
 ##
 ## WARNING! All changes made in this file will be lost when recompiling UI file!
 ################################################################################
 
-from PySide2.QtCore import (QCoreApplication, QDate, QDateTime, QMetaObject,
-    QObject, QPoint, QRect, QSize, QTime, QUrl, Qt)
-from PySide2.QtGui import (QBrush, QColor, QConicalGradient, QCursor, QFont,
-    QFontDatabase, QIcon, QKeySequence, QLinearGradient, QPalette, QPainter,
-    QPixmap, QRadialGradient)
-from PySide2.QtWidgets import *
+from PySide6.QtCore import *  # type: ignore
+from PySide6.QtGui import *  # type: ignore
+from PySide6.QtWidgets import *  # type: ignore
 
 from pyqtextra.common.jump_slider import JumpSlider
 
-from  . import sound_player_rc
+from . import sound_player_rc
+
 
 class Ui_SoundPlayer(object):
     def setupUi(self, SoundPlayer):
@@ -38,7 +36,6 @@ class Ui_SoundPlayer(object):
         self.lbl_pos.setObjectName(u"lbl_pos")
 
         self.horizontalLayout.addWidget(self.lbl_pos)
-
 
         self.verticalLayout.addLayout(self.horizontalLayout)
 
@@ -77,7 +74,9 @@ class Ui_SoundPlayer(object):
 
         self.horizontalLayout_11.addWidget(self.btn_play)
 
-        self.horizontalSpacer_4 = QSpacerItem(40, 20, QSizePolicy.Maximum, QSizePolicy.Minimum)
+        self.horizontalSpacer_4 = QSpacerItem(
+            40, 20, QSizePolicy.Maximum, QSizePolicy.Minimum
+        )
 
         self.horizontalLayout_11.addItem(self.horizontalSpacer_4)
 
@@ -85,41 +84,52 @@ class Ui_SoundPlayer(object):
         self.label.setObjectName(u"label")
         sizePolicy1.setHeightForWidth(self.label.sizePolicy().hasHeightForWidth())
         self.label.setSizePolicy(sizePolicy1)
-        self.label.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignVCenter)
+        self.label.setAlignment(Qt.AlignLeading | Qt.AlignLeft | Qt.AlignVCenter)
 
         self.horizontalLayout_11.addWidget(self.label)
 
         self.cb_playbackSpeed = QComboBox(SoundPlayer)
         self.cb_playbackSpeed.setObjectName(u"cb_playbackSpeed")
-        sizePolicy.setHeightForWidth(self.cb_playbackSpeed.sizePolicy().hasHeightForWidth())
+        sizePolicy.setHeightForWidth(
+            self.cb_playbackSpeed.sizePolicy().hasHeightForWidth()
+        )
         self.cb_playbackSpeed.setSizePolicy(sizePolicy)
 
         self.horizontalLayout_11.addWidget(self.cb_playbackSpeed)
 
-        self.horizontalSpacer_3 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+        self.horizontalSpacer_3 = QSpacerItem(
+            40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum
+        )
 
         self.horizontalLayout_11.addItem(self.horizontalSpacer_3)
 
-
         self.verticalLayout.addLayout(self.horizontalLayout_11)
-
 
         self.retranslateUi(SoundPlayer)
 
         QMetaObject.connectSlotsByName(SoundPlayer)
+
     # setupUi
 
     def retranslateUi(self, SoundPlayer):
-        SoundPlayer.setWindowTitle(QCoreApplication.translate("SoundPlayer", u"Form", None))
+        SoundPlayer.setWindowTitle(
+            QCoreApplication.translate("SoundPlayer", u"Form", None)
+        )
         self.lbl_pos.setText("")
-#if QT_CONFIG(tooltip)
-        self.btn_stop.setToolTip(QCoreApplication.translate("SoundPlayer", u"Stop", None))
-#endif // QT_CONFIG(tooltip)
+        # if QT_CONFIG(tooltip)
+        self.btn_stop.setToolTip(
+            QCoreApplication.translate("SoundPlayer", u"Stop", None)
+        )
+        # endif // QT_CONFIG(tooltip)
         self.btn_stop.setText("")
-#if QT_CONFIG(tooltip)
-        self.btn_play.setToolTip(QCoreApplication.translate("SoundPlayer", u"Play", None))
-#endif // QT_CONFIG(tooltip)
+        # if QT_CONFIG(tooltip)
+        self.btn_play.setToolTip(
+            QCoreApplication.translate("SoundPlayer", u"Play", None)
+        )
+        # endif // QT_CONFIG(tooltip)
         self.btn_play.setText("")
-        self.label.setText(QCoreApplication.translate("SoundPlayer", u"playback speed:", None))
-    # retranslateUi
+        self.label.setText(
+            QCoreApplication.translate("SoundPlayer", u"playback speed:", None)
+        )
 
+    # retranslateUi

@@ -1,4 +1,4 @@
-from PySide2 import QtCore, QtWidgets, QtGui
+from PySide6 import QtCore, QtWidgets, QtGui
 
 import datetime as dt
 
@@ -50,7 +50,7 @@ class SoundPlayerWidget(QtWidgets.QWidget, Ui_SoundPlayer):
         self.slider_time.seek_position.connect(self.seek_slider)
 
     def define_shortcuts(self):
-        QtWidgets.QShortcut(
+        QtGui.QShortcut(
             QtGui.QKeySequence(QtCore.Qt.Key_Space), self, self.btn_play.click
         )
 
