@@ -1,5 +1,6 @@
 import pyaudio
 from .audio import Audio
+import traceback
 
 
 class SoundPlayer:
@@ -27,13 +28,15 @@ class SoundPlayer:
         )
 
     def load(self, file_path):
-        print("librosa loading: " + file_path)
+        print("librosa loading: " + str(file_path))
         self.close_file()
         try:
-            self.audio = Audio(file_path)
+            self.audio = Audio(str(file_path))
             self.open_stream()
             return self.audio
-        except RuntimeError("Error, could not load file: " + file_path):
+        except Exception:
+            print("Error, could not load file: " + str(file_path))
+            print(traceback.format_exc())
             return None
 
     def play(self):
@@ -77,6 +80,7 @@ class SoundPlayer:
             # self.wave_file.rewind()
 
     def close_file(self):
+        self.pos = 0
         if self.stream:
             self.stream.close()
 
