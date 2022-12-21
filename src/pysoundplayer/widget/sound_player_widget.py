@@ -23,6 +23,7 @@ class SoundPlayerWidget(QtWidgets.QWidget, Ui_SoundPlayer):
         self.setupUi(self)
         self.file_path = file_path
         self.sound_player = SoundPlayer()
+        self.audio = None
         self.position = 0.0
         self.last_update = None
         self.playing = False
@@ -33,6 +34,9 @@ class SoundPlayerWidget(QtWidgets.QWidget, Ui_SoundPlayer):
         self.init_playback_speeds()
         if self.file_path is not None:
             self.load_file()
+
+    def audio_loaded(self):
+        return self.audio is not None
 
     @property
     def sr(self):
