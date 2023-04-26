@@ -13,7 +13,7 @@ setup(
     keywords="audio",
     # long_description=read('README.md'),
     name="pysoundplayer",
-    version="0.2",
+    version="0.3",
     packages=find_packages(),
     package_data={"": ["*.svg", "*.yaml", "*.zip", "*.ico", "*.bat"]},
 )
