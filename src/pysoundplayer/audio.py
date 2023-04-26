@@ -5,9 +5,17 @@ import soundfile
 
 
 class Audio:
+
+    DEFAULT_AUDIO_SPECS = {
+        "channels": 1,
+        "samplerate": 16000,
+        "subtype": "PCM_16",
+        "format": "RAW",
+    }
+
     def __init__(self, file_path, sr=None, mono=False, **kwargs):
         self.file_path = file_path
-        (self.data, self.sr) = librosa.load(file_path, sr=sr, mono=mono, **kwargs)
+        (self.data, self.sr) = self.load(file_path, sr=sr, mono=mono, **kwargs)
         self.nchannels = len(self.data.shape)
         self.nframes = self.data.shape[self.nchannels - 1]
         self.duration = self.nframes / self.sr
@@ -20,6 +28,21 @@ class Audio:
         else:
             data = self.data[:, index]
         return data
+
+    def load(self, file_path, sr=None, mono=False, **kwargs):
+        with open(file_path, "rb") as sound_file:
+            try:
+                wav, sample_rate = librosa.load(sound_file, sr=sr, mono=mono, **kwargs)
+            except Exception as exc:
+                print("Cannot read WAV file, trying reading raw")
+                audio_specs = kwargs.get("audio_specs", self.DEFAULT_AUDIO_SPECS)
+                wav, sample_rate = soundfile.read(sound_file, **audio_specs)
+                if len(wav) == 0:
+                    raise RuntimeError("Invalid wav file") from exc
+                # logging
+                with open("loading_raw.log", "a", encoding="utf8") as raw_log:
+                    raw_log.write(str(file_path) + "\n")
+        return wav, sample_rate
 
     def get_frames(self, start, end=None, nframes=None):
         if not end and not nframes:
@@ -115,13 +138,16 @@ class Audio:
                 res.append(last_sound)
         return res
 
-    def write(self, file_path, data=None, sr=None, start=None, end=None):
+    def write(self, file_path, data=None, sr=None, start=None, end=None, seconds=False):
         if data is None:
             sr = self.sr
             if start is None and end is None:
                 data = self.data
             else:
                 if start is not None and end is not None:
+                    if seconds:
+                        start = self.seconds_to_frames(start)
+                        end = self.seconds_to_frames(end)
                     data = self[start:end]
                 else:
                     raise AttributeError(
@@ -140,4 +166,13 @@ class Audio:
         extract = self[start:end]
         if self.nchannels > 1:
             extract = extract.T
+        return extract
+
+    def set_extract(self, extract, start, end, seconds=False):
+        if seconds:
+            start = self.seconds_to_frames(start)
+            end = self.seconds_to_frames(end)
+        if self.nchannels > 1:
+            extract = extract.T
+        self.data[start:end] = extract
         return extract
